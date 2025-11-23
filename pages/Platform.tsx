@@ -19,7 +19,7 @@ const Platform: React.FC = () => {
 
         <Reveal>
             <div className="inline-flex items-center gap-2 px-3 py-1 border border-white/10 bg-white/5 rounded-full text-[10px] font-mono uppercase tracking-widest text-muted mb-8 backdrop-blur-md">
-                <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                <span className="w-1.5 h-1.5 bg-coral rounded-full animate-pulse"></span>
                 <ScrambleText text="MISSION OPERATING SYSTEM" delay={200} />
             </div>
 
@@ -98,7 +98,7 @@ const Platform: React.FC = () => {
                         Replace the clutter with cohesion. Every operational function under one login, sharing one database.
                     </p>
                 </div>
-                <div className="hidden md:flex items-center gap-2 text-emerald-500 font-mono text-xs uppercase tracking-widest mt-4 md:mt-0">
+                <div className="hidden md:flex items-center gap-2 text-coral font-mono text-xs uppercase tracking-widest mt-4 md:mt-0">
                     <CheckCircle size={14} /> Unified Kernel
                 </div>
             </div>
@@ -192,7 +192,7 @@ const Platform: React.FC = () => {
                         </div>
                         {tile.highlight && (
                             <div className="mt-8 pt-4 border-t border-white/10">
-                                <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-widest animate-pulse">In Development</span>
+                                <span className="text-[10px] font-mono text-coral uppercase tracking-widest animate-pulse">In Development</span>
                             </div>
                         )}
                     </SpotlightCard>

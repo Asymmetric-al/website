@@ -50,8 +50,8 @@ const Missions: React.FC = () => {
                 }
             ].map((r, i) => (
                 <Reveal key={i} delay={i * 100}>
-                    <SpotlightCard className="h-64 flex flex-col justify-between p-6 bg-offblack/20">
-                        <r.icon className="text-white group-hover:scale-110 transition-transform" size={24} strokeWidth={1} />
+                    <SpotlightCard className="h-64 flex flex-col justify-between p-6 bg-offblack/20 group">
+                        <r.icon className="text-white group-hover:text-coral transition-colors" size={24} strokeWidth={1} />
                         <div>
                             <h3 className="text-lg font-display font-bold text-white mb-2">{r.role}</h3>
                             <p className="text-xs text-muted leading-relaxed text-balance">{r.desc}</p>
@@ -108,13 +108,13 @@ const Missions: React.FC = () => {
                 </p>
                 <ul className="space-y-4 font-mono text-xs text-muted uppercase tracking-widest">
                     <li className="flex items-center gap-3">
-                        <span className="w-1 h-1 bg-white"></span> Current Stack Analysis
+                        <span className="w-1 h-1 bg-coral"></span> Current Stack Analysis
                     </li>
                     <li className="flex items-center gap-3">
-                        <span className="w-1 h-1 bg-white"></span> Migration Planning
+                        <span className="w-1 h-1 bg-coral"></span> Migration Planning
                     </li>
                     <li className="flex items-center gap-3">
-                        <span className="w-1 h-1 bg-white"></span> Pilot Deployment
+                        <span className="w-1 h-1 bg-coral"></span> Pilot Deployment
                     </li>
                 </ul>
             </Reveal>

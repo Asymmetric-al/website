@@ -29,7 +29,7 @@ const Manifesto: React.FC = () => {
         <Reveal className="will-change-transform">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 mb-32 items-start">
                 <div className="md:text-right sticky top-32">
-                    <span className="font-mono text-xs text-emerald-500 uppercase tracking-widest block mb-2">01 // The Origin</span>
+                    <span className="font-mono text-xs text-coral uppercase tracking-widest block mb-2">01 // The Origin</span>
                     <h2 className="text-4xl md:text-5xl font-display font-bold text-white tracking-tight leading-none text-balance">
                         Bad tools are a stewardship issue.
                     </h2>
@@ -52,7 +52,7 @@ const Manifesto: React.FC = () => {
         <Reveal className="will-change-transform">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 mb-32 items-start">
                 <div className="md:text-right md:order-last sticky top-32">
-                    <span className="font-mono text-xs text-emerald-500 uppercase tracking-widest block mb-2">02 // The Design Principle</span>
+                    <span className="font-mono text-xs text-coral uppercase tracking-widest block mb-2">02 // The Design Principle</span>
                     <h2 className="text-4xl md:text-5xl font-display font-bold text-white tracking-tight leading-none text-balance">
                         The Upside Down Kingdom.
                     </h2>
@@ -75,7 +75,7 @@ const Manifesto: React.FC = () => {
         <Reveal className="will-change-transform">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 mb-32 items-center">
                 <div className="md:text-right">
-                    <span className="font-mono text-xs text-emerald-500 uppercase tracking-widest block mb-2">03 // The Staffing Model</span>
+                    <span className="font-mono text-xs text-coral uppercase tracking-widest block mb-2">03 // The Staffing Model</span>
                     <h2 className="text-4xl md:text-5xl font-display font-bold text-white tracking-tight leading-none text-balance">
                         By Missionaries,<br/>For Missionaries.
                     </h2>
@@ -91,7 +91,7 @@ const Manifesto: React.FC = () => {
                             We also retain paid development staff to ensure professional delivery.
                         </p>
                         <div className="font-mono text-[10px] text-muted uppercase tracking-widest border-t border-white/10 pt-4 flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
+                            <span className="w-1.5 h-1.5 bg-coral rounded-full"></span>
                             Covering Nonprofit: Global Fellowship Inc. (501c3)
                         </div>
                     </div>
@@ -102,7 +102,7 @@ const Manifesto: React.FC = () => {
         {/* Chapter 04: The Posture */}
         <Reveal className="will-change-transform">
              <div className="max-w-3xl mx-auto text-center border-t border-white/10 pt-24 pb-24">
-                <span className="font-mono text-xs text-emerald-500 uppercase tracking-widest block mb-8">04 // Our Posture</span>
+                <span className="font-mono text-xs text-coral uppercase tracking-widest block mb-8">04 // Our Posture</span>
                 <p className="text-2xl md:text-4xl font-display font-medium text-white leading-tight mb-12 text-balance">
                     We speak like practitioners. We do not posture. We acknowledge limits. We build open source because truth should be transparent.
                 </p>

@@ -37,7 +37,7 @@ const Give: React.FC = () => {
             <div className="lg:col-span-7 pt-8">
                 <Reveal>
                     <div className="inline-flex items-center gap-3 px-3 py-1 border border-white/10 bg-white/5 rounded-full text-[10px] font-mono uppercase tracking-widest text-muted mb-8 backdrop-blur-md">
-                        <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                        <span className="w-1.5 h-1.5 bg-coral rounded-full animate-pulse"></span>
                         <ScrambleText text="NONPROFIT 501(c)(3)" delay={200} />
                     </div>
 
@@ -56,7 +56,7 @@ const Give: React.FC = () => {
                     {PITCH_POINTS.map((item, i) => (
                         <Reveal key={i} delay={300 + (i * 100)}>
                             <div className="group">
-                                <h3 className="text-white font-display font-bold text-lg mb-2 group-hover:text-emerald-400 transition-colors">{item.title}</h3>
+                                <h3 className="text-white font-display font-bold text-lg mb-2 group-hover:text-coral transition-colors">{item.title}</h3>
                                 <p className="text-sm text-gray-500 leading-relaxed text-balance">{item.desc}</p>
                             </div>
                         </Reveal>
@@ -72,10 +72,10 @@ const Give: React.FC = () => {
                             {/* Header */}
                             <div className="flex justify-between items-center border-b border-white/10 pb-6">
                                 <div className="flex items-center gap-2 text-white">
-                                    <HeartHandshake size={16} className="text-emerald-500" />
+                                    <HeartHandshake size={16} className="text-coral" />
                                     <span className="font-mono text-sm uppercase tracking-wider font-bold">Secure Donation</span>
                                 </div>
-                                <div className="flex items-center gap-1 text-[10px] font-mono text-emerald-500/80 uppercase tracking-widest">
+                                <div className="flex items-center gap-1 text-[10px] font-mono text-coral/80 uppercase tracking-widest">
                                     <Lock size={10} />
                                     Encrypted
                                 </div>
@@ -128,12 +128,12 @@ const Give: React.FC = () => {
                                 </span>
                             </div>
 
-                            <Button className="w-full py-6 text-base bg-white hover:bg-emerald-400 hover:text-black border-none" icon={<ArrowRight size={16} />}>
+                            <Button className="w-full py-6 text-base bg-white hover:bg-coral hover:text-black border-none" icon={<ArrowRight size={16} />}>
                                 Process Donation
                             </Button>
 
                             <div className="flex items-center justify-center gap-2 text-[10px] font-mono text-gray-600 uppercase tracking-widest">
-                                <ShieldCheck size={12} className="text-emerald-500" />
+                                <ShieldCheck size={12} className="text-coral" />
                                 <span>256-bit SSL Encrypted</span>
                             </div>
                         </div>
@@ -153,8 +153,8 @@ const Give: React.FC = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {FAQ_ITEMS.map((item, i) => (
-                    <TechPanel key={i} noBorder className="bg-transparent pl-6 border-l border-white/10 hover:border-emerald-500/50 transition-colors group">
-                        <h4 className="text-white font-bold font-display text-lg mb-3 group-hover:text-emerald-400 transition-colors">{item.q}</h4>
+                    <TechPanel key={i} noBorder className="bg-transparent pl-6 border-l border-white/10 hover:border-coral/50 transition-colors group">
+                        <h4 className="text-white font-bold font-display text-lg mb-3 group-hover:text-coral transition-colors">{item.q}</h4>
                         <p className="text-sm text-gray-500 leading-relaxed text-balance">{item.a}</p>
                     </TechPanel>
                 ))}

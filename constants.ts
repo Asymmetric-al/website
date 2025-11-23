@@ -15,6 +15,7 @@ export const COLORS = {
   white: '#F2F2F2',
   muted: '#888888',
   border: '#222222',
+  coral: '#d5a790',
 };
 
 export const TECH_STACK = [

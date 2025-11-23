@@ -143,7 +143,7 @@ export const Footer: React.FC = () => {
                 <ul className="space-y-4 text-sm font-mono text-muted">
                     <li><Link to="/missions" className="hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity -ml-5 group-hover:ml-0"/> For Missions</Link></li>
                     <li><Link to="/give" className="hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity -ml-5 group-hover:ml-0"/> Give to Build</Link></li>
-                    <li><a href="mailto:info@asymmetric.al" className="hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity -ml-5 group-hover:ml-0"/> Contact Us</a></li>
+                    <li><Link to="/contact" className="hover:text-white transition-colors flex items-center gap-2 group"><ArrowRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity -ml-5 group-hover:ml-0"/> Contact Us</Link></li>
                 </ul>
             </div>
 
@@ -181,3 +181,4 @@ export const Footer: React.FC = () => {
     </footer>
   );
 };
+    

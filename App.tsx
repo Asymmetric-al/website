@@ -8,6 +8,7 @@ import Missions from './pages/Missions';
 import Give from './pages/Give';
 import Specs from './pages/Specs';
 import Manifesto from './pages/Manifesto';
+import Contact from './pages/Contact';
 
 // Scroll to top helper
 const ScrollToTop = () => {
@@ -32,6 +33,7 @@ const App: React.FC = () => {
             <Route path="/specs" element={<Specs />} />
             <Route path="/manifesto" element={<Manifesto />} />
             <Route path="/give" element={<Give />} />
+            <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
         <Footer />

@@ -52,7 +52,7 @@ const Home: React.FC = () => {
             <Container className="text-center">
                 <Reveal>
                     <div className="inline-flex items-center gap-2 px-4 py-2 border border-white/10 bg-black/60 text-[10px] font-mono uppercase tracking-widest text-white mb-12 backdrop-blur-md rounded-full shadow-2xl">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-coral animate-pulse"></span>
                         <ScrambleText text="Mission Operating System" delay={500} />
                     </div>
                 </Reveal>
@@ -138,7 +138,7 @@ const Home: React.FC = () => {
                     <Reveal key={i} delay={i * 100}>
                         <SpotlightCard className="p-10 group bg-offblack/40 border-white/5">
                             <div className="grid grid-cols-1 gap-4">
-                                <h3 className="text-2xl font-display font-bold text-white group-hover:text-emerald-400 transition-colors duration-300 tracking-tight">
+                                <h3 className="text-2xl font-display font-bold text-white group-hover:text-coral transition-colors duration-300 tracking-tight">
                                     {item.title}
                                 </h3>
                                 <p className="text-muted font-light text-lg leading-relaxed border-l border-white/10 pl-6 text-balance">
@@ -160,7 +160,7 @@ const Home: React.FC = () => {
             </Reveal>
             <Reveal delay={200}>
                 <div className="flex items-center gap-2 mt-4 md:mt-0">
-                    <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                    <span className="w-2 h-2 bg-coral rounded-full animate-pulse"></span>
                     <span className="font-mono text-xs text-muted uppercase tracking-widest block">System Capabilities</span>
                 </div>
             </Reveal>

@@ -16,8 +16,6 @@ import {
 } from 'lucide-react';
 
 // --- Static Data Configuration ---
-// Defined outside component to ensure reference stability and reduce render overhead.
-
 interface StackCategory {
     id: string;
     label: string;
@@ -132,10 +130,10 @@ const Specs: React.FC = () => {
             <div className="flex flex-col gap-8 max-w-5xl">
                 {/* Status Bar */}
                 <div className="inline-flex items-center gap-4 px-4 py-2 border border-white/10 bg-white/5 rounded-sm text-[10px] font-mono uppercase tracking-widest text-muted backdrop-blur-md w-fit">
-                    <span className="flex items-center gap-2 text-emerald-500">
+                    <span className="flex items-center gap-2 text-coral">
                         <span className="relative flex h-2 w-2">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-coral opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-coral"></span>
                         </span>
                         System Nominal
                     </span>
@@ -169,7 +167,7 @@ const Specs: React.FC = () => {
                         </div>
 
                         <div className="mb-8">
-                            <h3 className="font-display font-bold text-xl text-white tracking-tight mb-1 group-hover:text-emerald-400 transition-colors">{category.label}</h3>
+                            <h3 className="font-display font-bold text-xl text-white tracking-tight mb-1 group-hover:text-coral transition-colors">{category.label}</h3>
                             <p className="text-[10px] text-muted font-mono uppercase tracking-widest">{category.description}</p>
                         </div>
                         
@@ -218,7 +216,7 @@ const Specs: React.FC = () => {
                      <ul className="space-y-5">
                         {RELEASE_GATES.map((gate, i) => (
                             <li key={i} className="flex gap-4 items-start text-sm text-gray-400 group">
-                                <CheckCircle2 size={16} className="text-emerald-500/50 group-hover:text-emerald-500 transition-colors mt-0.5 flex-shrink-0" />
+                                <CheckCircle2 size={16} className="text-coral/50 group-hover:text-coral transition-colors mt-0.5 flex-shrink-0" />
                                 <span className="group-hover:text-gray-300 transition-colors">{gate}</span>
                             </li>
                         ))}
