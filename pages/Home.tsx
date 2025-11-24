@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Section, Button, Reveal, DitherGrid, DitherGlobe, SpotlightCard, Container, ScrambleText } from '../components/UI';
 import { ButtonVariant } from '../types';
@@ -44,7 +45,7 @@ const Home: React.FC = () => {
         {/* REMOVED REVEAL WRAPPER TO ENSURE IMMEDIATE VISIBILITY */}
         {/* Fixed: Removed 'contain: size' which caused 0x0 collapse */}
         <div 
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 opacity-70 scale-125 md:scale-100 pointer-events-none will-change-transform"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 opacity-70 scale-50 md:scale-100 pointer-events-none will-change-transform"
         >
             <DitherGlobe scale={1.2} />
         </div>
