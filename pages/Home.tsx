@@ -1,7 +1,7 @@
 
 import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Terminal, Code, ChevronRight } from 'lucide-react';
+import { ArrowRight, Terminal, Code } from 'lucide-react';
 import { 
   Section, 
   Button, 
@@ -197,7 +197,7 @@ const PhilosophySection = memo(() => (
                             </span>
                             
                             {/* Connector */}
-                            <div className="flex-1 mx-6 sm:mx-12 md:mx-16 relative flex items-center justify-center translate-y-0 md:-translate-y-2">
+                            <div className="flex-1 mx-8 sm:mx-12 md:mx-20 relative flex items-center justify-center translate-y-0 md:-translate-y-2">
                                 {/* The Track */}
                                 <div className="w-full h-[6px] md:h-[10px] bg-white/10 relative overflow-hidden rounded-sm">
                                      {/* The Quantum Pulse */}
