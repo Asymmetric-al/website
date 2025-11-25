@@ -69,7 +69,8 @@ const PHILOSOPHY_CARDS: readonly PhilosophyItem[] = [
 // --- Sub-Components ---
 
 const HeroSection: React.FC = memo(() => (
-    <div className="relative min-h-screen flex items-center justify-center isolate overflow-hidden">
+    // Updated: Removed min-h-screen to eliminate useless vertical space. Added explicit padding.
+    <div className="relative pt-32 pb-20 md:pt-52 md:pb-32 flex items-center justify-center isolate overflow-hidden">
         <DitherGrid />
         
         {/* Layer 0: Background Globe - CSS Containment for Perf */}
