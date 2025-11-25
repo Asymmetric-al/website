@@ -49,7 +49,7 @@ const STACK_DATA: readonly StackCategory[] = [
         icon: Database,
         description: "Polyglot storage layer.",
         meta: "LAYER 02",
-        items: ["PostgreSQL", "Amazon Aurora MySQL", "Redis", "TanStack DB", "pgvector", "TanStack Query", "TanStack Table"]
+        items: ["PostgreSQL", "Amazon Aurora MySQL", "Redis", "TanStack DB", "pgvector", "TanStack Query/Table"]
     },
     {
         id: "modules",
@@ -122,7 +122,7 @@ const RELEASE_GATES: readonly string[] = [
     "Statement Studio totals match source gifts",
     "Reconciliation ties Stripe payouts to journals",
     "SPF, DKIM, DMARC green across tenants",
-    "Secrets scan verified clean (Infisical)",
+    "Secrets scan verified clean (Keyclock/Infisical)",
     "PII masking verified in OpenTelemetry logs",
     "Zapier flows verified idempotent",
     "Two-step donor recovery paths verified"
@@ -132,12 +132,12 @@ const RELEASE_GATES: readonly string[] = [
 
 const StatusBadge: React.FC = () => (
     <div className="inline-flex items-center gap-4 px-4 py-2 border border-white/10 bg-white/5 rounded-sm text-[10px] font-mono uppercase tracking-widest text-muted backdrop-blur-md w-fit mb-8">
-        <span className="flex items-center gap-2 text-success">
+        <span className="flex items-center gap-2 text-white">
             <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-success"></span>
             </span>
-            System Nominal
+            System Normal
         </span>
         <span className="text-white/20">|</span>
         <ScrambleText text="TECH MANIFEST v2.1.0" delay={200} />

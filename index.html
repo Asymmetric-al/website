@@ -31,7 +31,7 @@
               muted: '#888888',
               coral: '#d5a790',
               success: '#10b981',
-              primary: '#6366f1',
+              primary: '#10b981', 
             },
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
@@ -47,6 +47,7 @@
               'spin-reverse-slower': 'spinReverse 90s linear infinite',
               'orbit': 'orbit 20s linear infinite',
               'scan': 'scan 4s linear infinite',
+              'marquee': 'marquee 160s linear infinite',
             },
             keyframes: {
               fadeIn: {
@@ -68,6 +69,10 @@
               scan: {
                 '0%': { transform: 'translateY(-100%)' },
                 '100%': { transform: 'translateY(100%)' },
+              },
+              marquee: {
+                '0%': { transform: 'translateX(0%)' },
+                '100%': { transform: 'translateX(-100%)' },
               }
             }
           }

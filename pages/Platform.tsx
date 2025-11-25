@@ -234,7 +234,7 @@ const MissionControlSection: React.FC = () => (
                     </p>
                 </div>
                 <div className="hidden md:flex items-center gap-2 text-success font-mono text-xs uppercase tracking-widest mt-4 md:mt-0">
-                    <CheckCircle size={14} /> Unified Kernel
+                    <CheckCircle size={14} /> Unified Platform
                 </div>
             </div>
         </Reveal>

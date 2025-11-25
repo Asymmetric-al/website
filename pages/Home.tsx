@@ -20,8 +20,32 @@ interface FeatureItem {
 
 // --- Static Data ---
 
-const TICKER_STRING = "Unified Operating System // Accelerating the Great Commission // Open Source Core // Hiring Builders // Soli Deo Gloria // Zero Admin Drag // ";
-const TICKER_TEXT = Array(8).fill(TICKER_STRING);
+const TICKER_ITEMS = [
+  "Unified Operating System",
+  "Accelerating the Great Commission",
+  "Open Source Core",
+  "Soli Deo Gloria",
+  "Zero Admin Drag",
+  "Tenant Sovereign Architecture",
+  "Missions-First Design",
+  "Small Inputs, Exponential Outputs",
+  "By Missionaries, For Missionaries",
+  "Nonprofit 501(c)(3)",
+  "Secure Data Stewardship",
+  "No Vendor Lock-in",
+  "Offline-First Architecture",
+  "Automated Reconciliation",
+  "Deploy with Confidence",
+  "Global Edge Network",
+  "Real-time Observability",
+  "Donation Processing",
+  "Partner Relationship Management",
+  "Digital Security",
+  "Kingdom Impact",
+  "Headless CMS",
+  "Audit-Ready Finance",
+  "Mobilization Pipelines"
+];
 
 const PHILOSOPHY_CARDS: readonly PhilosophyItem[] = [
     { 
@@ -64,8 +88,8 @@ const HeroSection: React.FC = () => (
                 
                 {/* Badge - CSS Animation (Immediate) */}
                 <div className="flex justify-center mb-12 opacity-0 animate-[slideUp_0.8s_cubic-bezier(0.16,1,0.3,1)_forwards]">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 border border-white/10 bg-black/60 text-[10px] font-mono uppercase tracking-widest text-white backdrop-blur-md rounded-full shadow-2xl">
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 border border-white/10 bg-black/60 text-[10px] font-mono uppercase tracking-widest text-muted backdrop-blur-md rounded-full shadow-2xl">
+                        <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse"></span>
                         <ScrambleText text="Mission Operating System" delay={200} />
                     </div>
                 </div>
@@ -106,19 +130,49 @@ const HeroSection: React.FC = () => (
     </div>
 );
 
-const TickerSection: React.FC = memo(() => (
-    <div 
-        className="border-y border-white/10 bg-black overflow-hidden py-4 relative z-20"
-        style={{ contentVisibility: 'auto' }}
-        aria-hidden="true"
-    >
-        <div className="flex whitespace-nowrap gap-16 animate-[marquee_60s_linear_infinite] hover:[animation-play-state:paused] text-xs font-mono uppercase tracking-widest text-muted opacity-70 cursor-default will-change-transform translate-z-0">
-            {TICKER_TEXT.map((text, i) => (
-                <span key={i}>{text}</span>
+const TickerSection: React.FC = memo(() => {
+    // Generate a seamless sequence of items
+    const renderTickerItems = () => (
+        <>
+            {/* 
+                We use the full list directly since it's now long enough to cover 
+                significant screen width. The parent double-render handles the looping. 
+            */}
+            {TICKER_ITEMS.map((text, i) => (
+                <div key={i} className="flex items-center mx-3 group/item cursor-default">
+                    <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] text-muted group-hover/item:text-white transition-colors duration-300 whitespace-nowrap">
+                        {text}
+                    </span>
+                    <span className="ml-6 text-[10px] md:text-xs text-white/10 font-normal font-mono select-none">//</span>
+                </div>
             ))}
+        </>
+    );
+
+    return (
+        <div 
+            className="border-y border-white/10 bg-black overflow-hidden py-4 relative z-20 flex select-none group"
+            aria-hidden="true"
+        >
+            {/* 
+                Seamless Loop Strategy:
+                Two identical flex containers animate side-by-side. 
+                As the first one moves fully out of view (-100%), the second one has perfectly replaced it.
+                The animation instantly resets to 0% at that exact moment.
+            */}
+            <div className="flex min-w-full shrink-0 animate-marquee items-center justify-around group-hover:[animation-play-state:paused] will-change-transform">
+                {renderTickerItems()}
+            </div>
+            <div className="flex min-w-full shrink-0 animate-marquee items-center justify-around group-hover:[animation-play-state:paused] will-change-transform">
+                {renderTickerItems()}
+            </div>
+            
+            {/* Gradient masks for smooth fade-in/out on edges */}
+            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
         </div>
-    </div>
-));
+    );
+});
 
 const PhilosophySection: React.FC = () => (
     <Section className="bg-black relative z-10">
@@ -178,7 +232,7 @@ const FeaturesSection: React.FC = () => (
             </Reveal>
             <Reveal delay={200}>
                 <div className="flex items-center gap-2 mt-4 md:mt-0">
-                    <span className="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+                    <span className="w-2 h-2 bg-success rounded-full animate-pulse"></span>
                     <span className="font-mono text-xs text-muted uppercase tracking-widest block">System Capabilities</span>
                 </div>
             </Reveal>

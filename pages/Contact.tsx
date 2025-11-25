@@ -127,7 +127,7 @@ const Contact: React.FC = () => {
         <div className="max-w-4xl mb-20 mt-12">
             <Reveal>
                 <div className="inline-flex items-center gap-2 px-3 py-1 border border-white/10 bg-white/5 rounded-full text-[10px] font-mono uppercase tracking-widest text-muted mb-8 backdrop-blur-md">
-                    <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"></span>
+                    <span className="w-1.5 h-1.5 bg-success rounded-full animate-pulse"></span>
                     <ScrambleText text="OPEN CHANNEL" delay={200} />
                 </div>
                 

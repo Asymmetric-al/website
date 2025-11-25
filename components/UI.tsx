@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState, ButtonHTMLAttributes, ReactNode, CSSProperties, forwardRef, memo, useCallback } from 'react';
 import { ButtonVariant } from '../types';
 import { Loader2, Plus } from 'lucide-react';
@@ -359,7 +360,7 @@ export const DitherGlobe: React.FC<{ className?: string, scale?: number }> = mem
 
       {/* Dynamic Satellite 2 (Bot - Counter Orbit) */}
        <div className="absolute inset-[-35%] w-[170%] h-[170%] animate-[spin-reverse_60s_linear_infinite] z-0 opacity-40">
-         <div className="absolute top-1/3 left-0 w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_10px_rgba(99,102,241,0.8)]"></div>
+         <div className="absolute top-1/3 left-0 w-1.5 h-1.5 bg-success rounded-full shadow-[0_0_10px_rgba(16,185,129,0.8)]"></div>
       </div>
 
       {/* Crosshairs & HUD Elements */}

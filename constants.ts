@@ -16,7 +16,7 @@ export const COLORS = {
   border: '#222222',
   coral: '#d5a790',
   success: '#10b981', // Emerald-500 for status
-  primary: '#6366f1', // Indigo-500 for tech accents
+  primary: '#10b981', // Updated to match success/green per user request (prev: #6366f1)
 } as const;
 
 export const TECH_STACK = [

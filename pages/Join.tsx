@@ -181,7 +181,7 @@ const RoleCard: React.FC<{ role: RoleItem }> = ({ role }) => {
     // Determine badge styling based on role type
     const isSupportRaised = role.type.includes('Support');
     const badgeStyle = isSupportRaised 
-        ? 'bg-blue-900/20 text-blue-300 border border-blue-800/30' 
+        ? 'bg-emerald-900/20 text-emerald-300 border border-emerald-800/30' // Updated to match primary/green
         : 'bg-white/10 text-white/80';
 
     return (
