@@ -175,7 +175,11 @@ export const TechPanel = ({ children, className = '', title, noBorder = false }:
         </div>
       )}
 
-      <div className={title ? 'pt-16 p-6 md:p-8' : 'p-6 md:p-8'}>
+      {/* 
+          Fix: Explicitly separate padding when title exists to ensure pt-16 (4rem) is not overridden 
+          by responsive all-side padding (e.g., md:p-8 would set top padding to 2rem).
+      */}
+      <div className={title ? 'pt-16 px-6 pb-6 md:px-8 md:pb-8' : 'p-6 md:p-8'}>
         {children}
       </div>
     </div>

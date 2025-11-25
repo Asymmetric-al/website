@@ -68,8 +68,8 @@ const PHILOSOPHY_CARDS: readonly PhilosophyItem[] = [
 
 // --- Sub-Components ---
 
-const HeroSection: React.FC = memo(() => (
-    // Updated: Removed min-h-screen to eliminate useless vertical space. Added explicit padding.
+const HeroSection = memo(() => (
+    // Explicit padding optimized for visual balance (pt-32 pb-20) to remove "useless space"
     <div className="relative pt-32 pb-20 md:pt-52 md:pb-32 flex items-center justify-center isolate overflow-hidden">
         <DitherGrid />
         
@@ -131,7 +131,7 @@ const HeroSection: React.FC = memo(() => (
 
 HeroSection.displayName = 'HeroSection';
 
-const TickerSection: React.FC = memo(() => {
+const TickerSection = memo(() => {
     return (
         <div 
             className="border-y border-white/10 bg-black overflow-hidden py-4 relative z-20 flex select-none group"
@@ -141,7 +141,6 @@ const TickerSection: React.FC = memo(() => {
                 Seamless Loop Strategy:
                 Two identical flex containers animate side-by-side. 
                 As the first one moves fully out of view (-100%), the second one has perfectly replaced it.
-                The animation instantly resets to 0% at that exact moment.
             */}
             {[0, 1].map((i) => (
                 <div 
@@ -168,7 +167,7 @@ const TickerSection: React.FC = memo(() => {
 
 TickerSection.displayName = 'TickerSection';
 
-const PhilosophySection: React.FC = memo(() => (
+const PhilosophySection = memo(() => (
     <Section className="bg-black relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
             
@@ -220,7 +219,7 @@ const PhilosophySection: React.FC = memo(() => (
 
 PhilosophySection.displayName = 'PhilosophySection';
 
-const RecruitmentSection: React.FC = memo(() => (
+const RecruitmentSection = memo(() => (
     <Section className="relative z-10 border-t border-white/5 bg-offblack/30">
         <Reveal>
             <div className="flex flex-col md:flex-row items-center justify-between gap-12">

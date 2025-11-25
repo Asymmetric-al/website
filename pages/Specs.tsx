@@ -1,6 +1,13 @@
 
-import React from 'react';
-import { Section, Reveal, SpotlightCard, DitherGrid, ScrambleText, DitherGlobe, Container } from '../components/UI';
+import React, { memo } from 'react';
+import { 
+    Section, 
+    Reveal, 
+    SpotlightCard, 
+    DitherGrid, 
+    ScrambleText, 
+    DitherGlobe 
+} from '../components/UI';
 import { 
     Terminal, 
     Database, 
@@ -19,17 +26,29 @@ import {
 // --- Types ---
 
 interface StackCategory {
-    id: string;
-    label: string;
-    icon: LucideIcon;
-    description: string;
-    items: readonly string[];
-    meta: string;
+    readonly id: string;
+    readonly label: string;
+    readonly icon: LucideIcon;
+    readonly description: string;
+    readonly items: readonly string[];
+    readonly meta: string;
 }
 
 interface Metric {
-    label: string;
-    value: string;
+    readonly label: string;
+    readonly value: string;
+}
+
+interface GateItemProps {
+    readonly gate: string;
+}
+
+interface MetricItemProps {
+    readonly metric: Metric;
+}
+
+interface StackCardProps {
+    readonly category: StackCategory;
 }
 
 // --- Static Data ---
@@ -107,7 +126,7 @@ const STACK_DATA: readonly StackCategory[] = [
         meta: "LAYER 09",
         items: ["OpenAI"]
     }
-];
+] as const;
 
 const PERFORMANCE_METRICS: readonly Metric[] = [
     { label: "Edge Protocol", value: "HTTP/3 + QUIC" },
@@ -116,7 +135,7 @@ const PERFORMANCE_METRICS: readonly Metric[] = [
     { label: "Core Web Vitals", value: "75th % Pass" },
     { label: "Availability", value: "99.9% SLO" },
     { label: "Render Start", value: "~1.0s Global" },
-];
+] as const;
 
 const RELEASE_GATES: readonly string[] = [
     "Statement Studio totals match source gifts",
@@ -126,11 +145,11 @@ const RELEASE_GATES: readonly string[] = [
     "PII masking verified in OpenTelemetry logs",
     "Zapier flows verified idempotent",
     "Two-step donor recovery paths verified"
-];
+] as const;
 
 // --- Sub-Components ---
 
-const StatusBadge: React.FC = () => (
+const StatusBadge = memo(() => (
     <div className="inline-flex items-center gap-4 px-4 py-2 border border-white/10 bg-white/5 rounded-sm text-[10px] font-mono uppercase tracking-widest text-muted backdrop-blur-md w-fit mb-8">
         <span className="flex items-center gap-2 text-white">
             <span className="relative flex h-2 w-2">
@@ -142,9 +161,10 @@ const StatusBadge: React.FC = () => (
         <span className="text-white/20">|</span>
         <ScrambleText text="TECH MANIFEST v2.1.0" delay={200} />
     </div>
-);
+));
+StatusBadge.displayName = 'StatusBadge';
 
-const StackCard: React.FC<{ category: StackCategory }> = ({ category }) => (
+const StackCard = memo(({ category }: StackCardProps) => (
     <SpotlightCard className="h-full p-8 bg-black hover:bg-offblack transition-colors duration-500 group">
         <div className="flex justify-between items-start mb-8">
             <div className="p-3 bg-white/5 rounded border border-white/10 text-gray-400 group-hover:text-white group-hover:border-white/30 transition-all">
@@ -173,9 +193,10 @@ const StackCard: React.FC<{ category: StackCategory }> = ({ category }) => (
             ))}
         </div>
     </SpotlightCard>
-);
+));
+StackCard.displayName = 'StackCard';
 
-const MetricItem: React.FC<{ metric: Metric }> = ({ metric }) => (
+const MetricItem = memo(({ metric }: MetricItemProps) => (
     <div className="group">
         <div className="text-[9px] font-mono text-muted uppercase tracking-widest mb-2 group-hover:text-white/60 transition-colors">
             {metric.label}
@@ -184,18 +205,20 @@ const MetricItem: React.FC<{ metric: Metric }> = ({ metric }) => (
             {metric.value}
         </div>
     </div>
-);
+));
+MetricItem.displayName = 'MetricItem';
 
-const GateItem: React.FC<{ gate: string }> = ({ gate }) => (
+const GateItem = memo(({ gate }: GateItemProps) => (
     <li className="flex gap-4 items-start text-sm text-gray-400 group">
         <CheckCircle2 size={16} className="text-success/50 group-hover:text-success transition-colors mt-0.5 flex-shrink-0" />
         <span className="group-hover:text-gray-300 transition-colors text-balance">{gate}</span>
     </li>
-);
+));
+GateItem.displayName = 'GateItem';
 
 // --- Sections ---
 
-const SpecsHero: React.FC = () => (
+const SpecsHero = memo(() => (
     <Section className="relative z-10 !pb-0">
         <Reveal>
             <div className="flex flex-col max-w-5xl">
@@ -210,9 +233,10 @@ const SpecsHero: React.FC = () => (
             </div>
         </Reveal>
     </Section>
-);
+));
+SpecsHero.displayName = 'SpecsHero';
 
-const TechStackGrid: React.FC = () => (
+const TechStackGrid = memo(() => (
     <Section grid className="bg-white/[0.02] border-y border-white/5 mt-20 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 border border-white/10 shadow-2xl">
             {STACK_DATA.map((category, i) => (
@@ -222,9 +246,10 @@ const TechStackGrid: React.FC = () => (
             ))}
         </div>
     </Section>
-);
+));
+TechStackGrid.displayName = 'TechStackGrid';
 
-const EngineeringStandards: React.FC = () => (
+const EngineeringStandards = memo(() => (
     <Section className="relative z-10">
         <Reveal>
             <div className="flex items-center gap-2 mb-8 opacity-60">
@@ -255,7 +280,8 @@ const EngineeringStandards: React.FC = () => (
             </div>
         </Reveal>
     </Section>
-);
+));
+EngineeringStandards.displayName = 'EngineeringStandards';
 
 // --- Main Component ---
 

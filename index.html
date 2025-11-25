@@ -1,56 +1,64 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth bg-black antialiased">
   <head>
+    <!-- Core Meta -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#020202" />
     <title>Asymmetric.al</title>
     <meta name="description" content="Asymmetric.al - One platform for Christian missions. Mobilize workers, care for donors, and manage operations in one surface." />
-    <meta name="theme-color" content="#020202" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Fonts -->
+    <!-- Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS Engine -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
+              // Brand Palette
               black: '#020202',
               offblack: '#0A0A0A',
               panel: '#111111',
               border: '#222222',
               white: '#F2F2F2',
-              muted: '#888888',
               coral: '#d5a790',
-              success: '#10b981',
-              primary: '#10b981',
-              // Shadcn Presets
-              background: "hsl(0 0% 100%)",
-              foreground: "hsl(240 10% 3.9%)",
-              card: "hsl(0 0% 100%)",
-              "card-foreground": "hsl(240 10% 3.9%)",
-              popover: "hsl(0 0% 100%)",
-              "popover-foreground": "hsl(240 10% 3.9%)",
-              primary: "hsl(240 5.9% 10%)",
-              "primary-foreground": "hsl(0 0% 98%)",
-              secondary: "hsl(240 4.8% 95.9%)",
-              "secondary-foreground": "hsl(240 5.9% 10%)",
-              muted: "hsl(240 4.8% 95.9%)",
-              "muted-foreground": "hsl(240 3.8% 46.1%)",
-              accent: "hsl(240 4.8% 95.9%)",
-              "accent-foreground": "hsl(240 5.9% 10%)",
-              destructive: "hsl(0 84.2% 60.2%)",
-              "destructive-foreground": "hsl(0 0% 98%)",
-              border: "hsl(240 5.9% 90%)",
-              input: "hsl(240 5.9% 90%)",
-              ring: "hsl(240 10% 3.9%)",
+              success: '#10b981', // Emerald-500
+              
+              // Semantic Mapping (Shadcn + Brand Dark Mode)
+              background: "#020202",
+              foreground: "#F2F2F2",
+              
+              primary: "#10b981", // Emerald-500
+              "primary-foreground": "#020202",
+              
+              secondary: "#111111",
+              "secondary-foreground": "#F2F2F2",
+              
+              muted: "#888888",
+              "muted-foreground": "#555555",
+              
+              accent: "#111111",
+              "accent-foreground": "#F2F2F2",
+              
+              destructive: "#ef4444",
+              "destructive-foreground": "#F2F2F2",
+              
+              card: "#020202",
+              "card-foreground": "#F2F2F2",
+              
+              popover: "#020202",
+              "popover-foreground": "#F2F2F2",
+              
+              input: "#222222",
+              ring: "#10b981",
             },
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
@@ -99,7 +107,7 @@
       };
     </script>
 
-    <!-- Global Styles -->
+    <!-- Global Styles & Utilities -->
     <style>
       :root {
         color-scheme: dark;
@@ -111,7 +119,7 @@
         -moz-osx-font-smoothing: grayscale;
         overflow-x: hidden;
       }
-      /* Noise Texture */
+      /* Noise Texture Overlay */
       .bg-noise {
         position: fixed;
         top: 0;
@@ -140,25 +148,25 @@
       }
     </style>
 
-    <!-- Import Map -->
+    <!-- React 19 & Library Imports -->
     <script type="importmap">
-{
-  "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
-    "recharts": "https://aistudiocdn.com/recharts@^3.4.1",
-    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "framer-motion": "https://aistudiocdn.com/framer-motion@^11.0.8",
-    "motion/react": "https://aistudiocdn.com/framer-motion@^11.0.8",
-    "clsx": "https://aistudiocdn.com/clsx@^2.1.0",
-    "tailwind-merge": "https://aistudiocdn.com/tailwind-merge@^2.2.1",
-    "@radix-ui/react-slot": "https://aistudiocdn.com/@radix-ui/react-slot@^1.2.4",
-    "motion/": "https://aistudiocdn.com/motion@^12.23.24/"
-  }
-}
-</script>
+    {
+      "imports": {
+        "react/": "https://aistudiocdn.com/react@^19.2.0/",
+        "react": "https://aistudiocdn.com/react@^19.2.0",
+        "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+        "recharts": "https://aistudiocdn.com/recharts@^3.4.1",
+        "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6",
+        "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+        "framer-motion": "https://aistudiocdn.com/framer-motion@^11.0.8",
+        "motion/react": "https://aistudiocdn.com/framer-motion@^11.0.8",
+        "clsx": "https://aistudiocdn.com/clsx@^2.1.0",
+        "tailwind-merge": "https://aistudiocdn.com/tailwind-merge@^2.2.1",
+        "@radix-ui/react-slot": "https://aistudiocdn.com/@radix-ui/react-slot@^1.2.4",
+        "motion/": "https://aistudiocdn.com/motion@^12.23.24/"
+      }
+    }
+    </script>
   </head>
   <body>
     <div class="bg-noise" aria-hidden="true"></div>
