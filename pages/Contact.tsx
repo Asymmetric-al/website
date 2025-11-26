@@ -16,10 +16,14 @@ interface ContactChannel {
 
 interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     readonly label: string;
+    readonly className?: string;
+    readonly name?: string;
 }
 
 interface FormTextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
     readonly label: string;
+    readonly className?: string;
+    readonly name?: string;
 }
 
 // --- Constants ---
@@ -98,33 +102,41 @@ const ChannelItem = memo(({ channel }: { readonly channel: ContactChannel }) => 
 
 ChannelItem.displayName = 'ChannelItem';
 
-const FormInput = memo(({ label, className = "", ...props }: FormInputProps) => (
-    <div className="space-y-2">
-        <label className="font-mono text-[10px] uppercase tracking-widest text-gray-500" htmlFor={props.name}>
-            {label}
-        </label>
-        <input 
-            id={props.name}
-            className={`w-full bg-white/5 border border-white/10 p-4 text-white font-mono text-sm focus:border-primary focus:bg-white/10 outline-none transition-all placeholder:text-white/20 rounded-sm ${className}`}
-            {...props} 
-        />
-    </div>
-));
+const FormInput = memo((props: FormInputProps) => {
+    const { label, className = "", name, ...rest } = props;
+    return (
+        <div className="space-y-2">
+            <label className="font-mono text-[10px] uppercase tracking-widest text-gray-500" htmlFor={name}>
+                {label}
+            </label>
+            <input 
+                id={name}
+                name={name}
+                className={`w-full bg-white/5 border border-white/10 p-4 text-white font-mono text-sm focus:border-primary focus:bg-white/10 outline-none transition-all placeholder:text-white/20 rounded-sm ${className}`}
+                {...rest} 
+            />
+        </div>
+    );
+});
 
 FormInput.displayName = 'FormInput';
 
-const FormTextArea = memo(({ label, className = "", ...props }: FormTextAreaProps) => (
-    <div className="space-y-2">
-        <label className="font-mono text-[10px] uppercase tracking-widest text-gray-500" htmlFor={props.name}>
-            {label}
-        </label>
-        <textarea 
-            id={props.name}
-            className={`w-full bg-white/5 border border-white/10 p-4 text-white font-mono text-sm focus:border-primary focus:bg-white/10 outline-none transition-all placeholder:text-white/20 resize-none rounded-sm ${className}`}
-            {...props} 
-        />
-    </div>
-));
+const FormTextArea = memo((props: FormTextAreaProps) => {
+    const { label, className = "", name, ...rest } = props;
+    return (
+        <div className="space-y-2">
+            <label className="font-mono text-[10px] uppercase tracking-widest text-gray-500" htmlFor={name}>
+                {label}
+            </label>
+            <textarea 
+                id={name}
+                name={name}
+                className={`w-full bg-white/5 border border-white/10 p-4 text-white font-mono text-sm focus:border-primary focus:bg-white/10 outline-none transition-all placeholder:text-white/20 resize-none rounded-sm ${className}`}
+                {...rest} 
+            />
+        </div>
+    );
+});
 
 FormTextArea.displayName = 'FormTextArea';
 

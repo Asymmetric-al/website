@@ -96,7 +96,8 @@ const FalseChoicePanel: React.FC<{ option: ProblemOption }> = ({ option }) => {
                     } group-hover:scale-105 transition-transform duration-500 shadow-lg`}>
                         <option.icon size={24} strokeWidth={1.5} />
                     </div>
-                    <span className="font-mono text-[9px] text-white/40 uppercase tracking-widest bg-white/5 px-2 py-1 rounded border border-white/5">
+                    {/* ENHANCED OPTION CHIP */}
+                    <span className="font-mono text-[11px] font-bold text-white uppercase tracking-widest bg-white/15 px-4 py-2 rounded border border-white/20 backdrop-blur-md shadow-lg">
                         {label}
                     </span>
                 </div>
