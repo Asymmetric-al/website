@@ -291,9 +291,14 @@ const FooterBottomBar: React.FC<{ readonly year: number }> = memo(({ year }) => 
             >
                 <Github size={16} />
             </a>
-            <div className="text-[10px] font-mono text-white uppercase tracking-widest">
+            <a 
+                href="https://github.com/jadenzaleski/bible-translations"
+                target="_blank"
+                rel="noreferrer"
+                className="text-[10px] font-mono text-white uppercase tracking-widest cursor-default"
+            >
                 Soli Deo Gloria
-            </div>
+            </a>
         </div>
     </div>
 ));

@@ -1,13 +1,12 @@
-
-import React from 'react';
-import { Container, DitherGrid, ScrambleText, Reveal, DitherGlobe } from '../components/UI';
+import React, { memo } from 'react';
+import { Container, DitherGrid, ScrambleText, Reveal, DitherGlobe, Section } from '../components/UI';
 import { BookOpen } from 'lucide-react';
 
 // --- Types ---
 
 interface FaithPoint {
-  label: string;
-  text: string;
+  readonly label: string;
+  readonly text: string;
 }
 
 // --- Static Data ---
@@ -49,29 +48,75 @@ const FAITH_POINTS: readonly FaithPoint[] = [
 
 // --- Sub-Components ---
 
-const FaithPointItem: React.FC<{ point: FaithPoint; index: number }> = ({ point, index }) => (
-    <Reveal delay={index * 100}>
-        <div className="relative pl-8 md:pl-12 group">
-             {/* Large background number */}
-             <div 
-                className="absolute left-0 top-0 text-4xl md:text-6xl font-display font-bold text-white/5 group-hover:text-white/10 transition-colors select-none -translate-x-2 md:-translate-x-4" 
-                aria-hidden="true"
-             >
-                {(index + 1).toString().padStart(2, '0')}
+const FaithHero = memo(() => (
+    <Section className="relative z-10 border-b border-white/5 pb-16 md:pb-24">
+        <Container>
+            <Reveal>
+                <div className="max-w-4xl">
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 bg-white/5 rounded-full text-[10px] font-mono uppercase tracking-widest text-muted mb-8 backdrop-blur-md">
+                        <BookOpen size={12} className="text-primary" />
+                        <ScrambleText text="DOCTRINAL FOUNDATION" delay={200} />
+                    </div>
+                    
+                    <h1 className="text-6xl md:text-8xl font-display font-bold text-white tracking-tighter leading-[0.9] mb-8">
+                        Statement<br/>
+                        of Faith.
+                    </h1>
+                    
+                    <div className="border-l-2 border-white/10 pl-8">
+                        <p className="text-xl text-gray-400 font-light leading-relaxed max-w-2xl text-balance">
+                             The theological bedrock upon which we build. We are a project of Global Fellowship Inc., standing on the historic Christian faith.
+                        </p>
+                    </div>
+                </div>
+            </Reveal>
+        </Container>
+    </Section>
+));
+
+FaithHero.displayName = 'FaithHero';
+
+const FaithPointItem = memo(({ point, index }: { readonly point: FaithPoint; readonly index: number }) => (
+    <Reveal delay={index * 50} className="w-full">
+        <div className="group relative grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 py-12 border-b border-white/5 transition-colors duration-500 hover:bg-white/[0.02]">
+             {/* Left Column: Number & Label */}
+             <div className="md:col-span-3 flex flex-row md:flex-col items-baseline md:items-start gap-4 md:gap-2 select-none">
+                 <span className="text-4xl md:text-5xl font-display font-bold text-white/10 group-hover:text-white/30 transition-colors duration-500">
+                     {(index + 1).toString().padStart(2, '0')}
+                 </span>
+                 <span className="font-mono text-xs text-primary/80 uppercase tracking-widest pt-1 group-hover:text-primary transition-colors">
+                     // {point.label}
+                 </span>
              </div>
-             
-             {/* Vertical line connector */}
-             <div className="absolute left-0 top-4 bottom-0 w-px bg-white/10 group-hover:bg-white/20 transition-colors hidden md:block"></div>
-             
-             <p className="text-lg md:text-xl text-gray-300 font-light leading-relaxed">
-                <span className="text-white font-bold mr-3 uppercase text-sm tracking-widest font-mono block mb-2 opacity-60">
-                    {point.label}.
-                </span>
-                {point.text}
-             </p>
+
+             {/* Right Column: Text */}
+             <div className="md:col-span-9">
+                 <p className="text-lg md:text-xl text-gray-400 font-light leading-relaxed text-balance group-hover:text-gray-200 transition-colors duration-500">
+                     {point.text}
+                 </p>
+             </div>
         </div>
     </Reveal>
-);
+));
+
+FaithPointItem.displayName = 'FaithPointItem';
+
+const FaithFooter = memo(() => (
+    <Section className="py-24 relative z-10">
+        <Container>
+            <Reveal delay={200}>
+                <div className="flex flex-col items-center justify-center opacity-40 hover:opacity-100 transition-opacity duration-500">
+                        <div className="w-16 h-16 border border-white/20 rounded-full flex items-center justify-center mb-6 bg-white/[0.02]">
+                            <span className="text-2xl font-serif italic">†</span>
+                        </div>
+                        <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-white">Soli Deo Gloria</div>
+                </div>
+            </Reveal>
+        </Container>
+    </Section>
+));
+
+FaithFooter.displayName = 'FaithFooter';
 
 // --- Main Component ---
 
@@ -81,42 +126,24 @@ const Faith: React.FC = () => {
         <DitherGrid className="opacity-10 fixed inset-0 z-0" />
         
         {/* Background Atmosphere */}
-        <div className="fixed top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 opacity-10 pointer-events-none z-0">
+        <div className="fixed top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 opacity-10 pointer-events-none z-0 mix-blend-screen">
             <DitherGlobe scale={1.8} />
         </div>
 
-        <Container className="relative z-10 pb-24">
-            {/* Header */}
-            <div className="max-w-4xl mx-auto mt-12 mb-20 text-center">
-                <Reveal>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 border border-white/10 bg-white/5 rounded-full text-[10px] font-mono uppercase tracking-widest text-muted mb-6 backdrop-blur-md">
-                        <BookOpen size={12} className="text-primary" />
-                        <ScrambleText text="DOCTRINAL FOUNDATION" delay={200} />
-                    </div>
-                    <h1 className="text-5xl md:text-7xl font-display font-bold tracking-tighter leading-none mb-6">
-                        Statement of Faith
-                    </h1>
-                    <p className="text-xl text-gray-400 font-light leading-relaxed max-w-2xl mx-auto">
-                         The theological bedrock upon which we build.
-                    </p>
-                </Reveal>
-            </div>
+        <FaithHero />
 
-            {/* Doctrinal Points */}
-            <div className="max-w-3xl mx-auto space-y-16">
-                {FAITH_POINTS.map((item, i) => (
-                    <FaithPointItem key={i} point={item} index={i} />
-                ))}
-            </div>
-            
-            {/* Footer Seal */}
-            <Reveal delay={800}>
-                <div className="mt-24 pt-12 border-t border-white/10 text-center">
-                     <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/40">Soli Deo Gloria</div>
+        {/* Doctrinal Points List */}
+        <Section className="relative z-10 bg-white/[0.02] !pt-0">
+            <Container className="max-w-5xl">
+                <div className="flex flex-col border-t border-white/5">
+                    {FAITH_POINTS.map((item, i) => (
+                        <FaithPointItem key={i} point={item} index={i} />
+                    ))}
                 </div>
-            </Reveal>
-
-        </Container>
+            </Container>
+        </Section>
+        
+        <FaithFooter />
     </div>
   );
 };
