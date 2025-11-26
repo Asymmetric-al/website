@@ -1,4 +1,5 @@
-import React, { Component, Suspense, lazy, useEffect, useLayoutEffect, type ErrorInfo, type ReactNode } from 'react';
+
+import React, { Suspense, lazy, useLayoutEffect, Component, type ErrorInfo, type ReactNode } from 'react';
 import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Loader2, AlertTriangle, RefreshCcw } from 'lucide-react';
 import { Navbar, Footer } from './components/Layout';
@@ -87,7 +88,7 @@ const ScrollToTop: React.FC = () => {
  */
 const LoadingFallback: React.FC = () => (
   <div 
-    className="flex items-center justify-center min-h-[60vh] text-white/20 animate-pulse" 
+    className="flex items-center justify-center min-h-[60vh] text-muted-foreground animate-pulse" 
     aria-label="Loading content..."
     role="status"
   >
@@ -100,7 +101,7 @@ const LoadingFallback: React.FC = () => (
  * Catches rendering errors in child components (like lazy load failures).
  */
 interface ErrorBoundaryProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 interface ErrorBoundaryState {
@@ -108,11 +109,11 @@ interface ErrorBoundaryState {
   error: Error | null;
 }
 
-class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  constructor(props: ErrorBoundaryProps) {
-    super(props);
-    this.state = { hasError: false, error: null };
-  }
+class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  state: ErrorBoundaryState = {
+    hasError: false,
+    error: null
+  };
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     return { hasError: true, error };
@@ -130,11 +131,11 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     if (this.state.hasError) {
       return (
         <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-6">
-          <div className="p-4 bg-red-500/10 rounded-full mb-6 text-red-500 border border-red-500/20">
+          <div className="p-4 bg-destructive/10 rounded-full mb-6 text-destructive border border-destructive/20">
             <AlertTriangle size={32} />
           </div>
-          <h2 className="text-2xl font-display font-bold text-white mb-2">System Anomaly Detected</h2>
-          <p className="text-gray-400 mb-8 max-w-md mx-auto text-balance">
+          <h2 className="text-2xl font-display font-bold text-foreground mb-2">System Anomaly Detected</h2>
+          <p className="text-muted-foreground mb-8 max-w-md mx-auto text-balance">
             The application encountered an unexpected error. This may be due to a network interruption or a stale deployment cache.
           </p>
           <Button onClick={this.handleReload} icon={<RefreshCcw size={16} />}>
@@ -151,7 +152,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 // --- Layout Wrapper ---
 
 const AppLayout: React.FC<{ children: ReactNode }> = ({ children }) => (
-  <div className="flex flex-col min-h-screen bg-black text-white font-sans antialiased selection:bg-white selection:text-black">
+  <div className="flex flex-col min-h-screen bg-background text-foreground font-sans antialiased selection:bg-foreground selection:text-background transition-colors duration-300">
     <ScrollToTop />
     <Navbar />
     <main className="flex-grow relative w-full isolate">

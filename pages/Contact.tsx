@@ -51,11 +51,11 @@ const CONTACT_CHANNELS: readonly ContactChannel[] = [
 const ChannelItem = memo(({ channel }: { readonly channel: ContactChannel }) => {
   const InnerContent = (
     <>
-        <div className="flex items-center gap-3 text-white mb-2 group-hover:text-primary transition-colors">
+        <div className="flex items-center gap-3 text-foreground mb-2 group-hover:text-primary transition-colors">
             <channel.icon size={20} strokeWidth={1.5} />
             <h3 className="font-display font-bold text-lg tracking-tight">{channel.title}</h3>
         </div>
-        <div className="text-sm text-gray-500 font-mono pl-8 mb-2 leading-relaxed group-hover:text-gray-300 transition-colors">
+        <div className="text-sm text-muted-foreground font-mono pl-8 mb-2 leading-relaxed group-hover:text-foreground transition-colors">
             {channel.content}
         </div>
         {channel.meta && (
@@ -98,7 +98,7 @@ const Contact: React.FC = () => {
   }, []);
 
   return (
-    <div className="pt-24 min-h-screen bg-black text-white selection:bg-white selection:text-black font-sans overflow-x-hidden">
+    <div className="pt-24 min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background font-sans overflow-x-hidden">
       <GridPattern className="opacity-20 fixed inset-0 z-0" />
       
       {/* Background Globe */}
@@ -111,15 +111,15 @@ const Contact: React.FC = () => {
         {/* Header */}
         <div className="max-w-4xl mb-20 mt-12">
             <Reveal>
-                <div className="inline-flex items-center gap-2 px-3 py-1 border border-white/10 bg-white/5 rounded-full text-[10px] font-mono uppercase tracking-widest text-muted mb-8 backdrop-blur-md">
+                <div className="inline-flex items-center gap-2 px-3 py-1 border border-border bg-secondary/50 rounded-full text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-8 backdrop-blur-md">
                     <span className="w-1.5 h-1.5 bg-success rounded-full animate-pulse"></span>
                     <ScrambleText text="OPEN CHANNEL" delay={200} />
                 </div>
                 
-                <h1 className="text-6xl md:text-8xl font-display font-bold text-white tracking-tighter leading-[0.9] mb-8">
+                <h1 className="text-6xl md:text-8xl font-display font-bold text-foreground tracking-tighter leading-[0.9] mb-8">
                     Start the<br/>Conversation.
                 </h1>
-                <p className="text-xl text-gray-400 font-light max-w-2xl leading-relaxed text-balance border-l border-white/20 pl-6">
+                <p className="text-xl text-muted-foreground font-light max-w-2xl leading-relaxed text-balance border-l border-border pl-6">
                     Whether you are an agency ready to migrate or a builder looking to contribute, we are ready to listen.
                 </p>
             </Reveal>
@@ -130,13 +130,13 @@ const Contact: React.FC = () => {
             {/* Contact Channels */}
             <div className="lg:col-span-5 space-y-6">
                 <Reveal delay={200}>
-                    <TechPanel title="CHANNELS" className="bg-black/80 backdrop-blur-md">
+                    <TechPanel title="CHANNELS" className="bg-card/80 backdrop-blur-md">
                         <div className="space-y-8">
                             {CONTACT_CHANNELS.map((channel, index) => (
                                 <React.Fragment key={channel.id}>
                                     <ChannelItem channel={channel} />
                                     {index < CONTACT_CHANNELS.length - 1 && (
-                                        <div className="w-full h-px bg-white/10"></div>
+                                        <div className="w-full h-px bg-border"></div>
                                     )}
                                 </React.Fragment>
                             ))}
@@ -148,9 +148,9 @@ const Contact: React.FC = () => {
             {/* Interactive Form Terminal */}
             <div className="lg:col-span-7">
                 <Reveal delay={400}>
-                    <SpotlightCard className="bg-white/[0.02] border-white/10 p-1">
-                        <div className="bg-black p-8 md:p-10 relative overflow-hidden">
-                            <div className="flex items-center gap-2 text-muted mb-8 pb-4 border-b border-white/10">
+                    <SpotlightCard className="bg-card border-border p-1">
+                        <div className="bg-background p-8 md:p-10 relative overflow-hidden">
+                            <div className="flex items-center gap-2 text-muted-foreground mb-8 pb-4 border-b border-border">
                                 <Terminal size={16} />
                                 <span className="font-mono text-xs uppercase tracking-widest">Transmission Uplink</span>
                             </div>

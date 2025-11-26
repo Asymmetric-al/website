@@ -1,6 +1,7 @@
+
 import React, { memo, useEffect, useState } from 'react';
 import { Container, DitherGrid, Reveal, ScrambleText, Section } from '../components/UI';
-import { Scale, FileText, ArrowRight, ShieldAlert, Check, ChevronRight } from 'lucide-react';
+import { Scale, FileText, ArrowRight, ShieldAlert, ChevronRight } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 // --- Types ---
@@ -40,15 +41,15 @@ const TOC_ITEMS: readonly TocItem[] = [
 const TermSection = memo(({ id, number, title, children }: TermSectionProps) => (
   <div id={id} className="scroll-mt-32 mb-20 relative group">
     {/* Hover interaction line */}
-    <div className="absolute -left-6 md:-left-12 top-0 bottom-0 w-px bg-white/10 group-hover:bg-white/20 transition-colors duration-500" />
+    <div className="absolute -left-6 md:-left-12 top-0 bottom-0 w-px bg-border group-hover:bg-foreground/20 transition-colors duration-500" />
     <div className="absolute -left-6 md:-left-12 top-0 h-12 w-px bg-primary scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
     
     <div className="flex flex-col gap-6">
         <div className="flex items-baseline gap-4">
             <span className="font-mono text-xs text-primary uppercase tracking-widest">{number}</span>
-            <h3 className="text-3xl font-display font-bold text-white tracking-tight leading-none">{title}</h3>
+            <h3 className="text-3xl font-display font-bold text-foreground tracking-tight leading-none">{title}</h3>
         </div>
-        <div className="prose prose-invert prose-lg max-w-none text-gray-400 font-light leading-relaxed">
+        <div className="prose dark:prose-invert prose-lg max-w-none text-muted-foreground font-light leading-relaxed">
             {children}
         </div>
     </div>
@@ -98,8 +99,8 @@ const TableOfContents = () => {
           className={cn(
             "flex items-center justify-between group py-2 pr-4 border-l-[2px] transition-all duration-300",
             activeId === item.id 
-              ? "border-primary text-white pl-4 bg-white/[0.02]" 
-              : "border-transparent text-gray-500 hover:text-gray-300 hover:border-white/20 pl-4"
+              ? "border-primary text-foreground pl-4 bg-secondary/50" 
+              : "border-transparent text-muted-foreground hover:text-foreground hover:border-border pl-4"
           )}
         >
           <span className="font-mono text-[10px] uppercase tracking-widest truncate">{item.label}</span>
@@ -116,29 +117,29 @@ const TableOfContents = () => {
 
 const Terms: React.FC = () => {
   return (
-    <div className="pt-24 min-h-screen bg-black text-white font-sans selection:bg-white selection:text-black overflow-x-hidden">
+    <div className="pt-24 min-h-screen bg-background text-foreground font-sans selection:bg-foreground selection:text-background overflow-x-hidden">
       <DitherGrid className="opacity-10 fixed inset-0 z-0" aria-hidden="true" />
       
       <Section className="relative z-10 !pb-24">
         <Container>
             
             {/* Header */}
-            <div className="mb-24 pb-12 border-b border-white/5">
+            <div className="mb-24 pb-12 border-b border-border">
                 <Reveal>
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 bg-white/5 rounded-full text-[10px] font-mono uppercase tracking-widest text-muted mb-8 backdrop-blur-md">
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-border bg-secondary/50 rounded-full text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-8 backdrop-blur-md">
                         <Scale size={12} className="text-primary" />
                         <ScrambleText text="LEGAL AGREEMENT" delay={200} />
                     </div>
-                    <h1 className="text-6xl md:text-8xl font-display font-bold text-white mb-8 tracking-tighter leading-[0.9]">
+                    <h1 className="text-6xl md:text-8xl font-display font-bold text-foreground mb-8 tracking-tighter leading-[0.9]">
                         Terms of Service
                     </h1>
                 </Reveal>
                 <Reveal delay={100}>
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                        <p className="text-xl text-gray-400 font-light max-w-2xl leading-relaxed text-balance border-l border-white/20 pl-6">
+                        <p className="text-xl text-muted-foreground font-light max-w-2xl leading-relaxed text-balance border-l border-border pl-6">
                             Please read these Terms of Service ("Terms", "Terms of Service") carefully before using the Asymmetric.al website and Mission Control platform.
                         </p>
-                        <div className="flex items-center gap-3 text-xs font-mono text-gray-500 uppercase tracking-widest bg-white/[0.02] border border-white/10 px-4 py-2 rounded-sm">
+                        <div className="flex items-center gap-3 text-xs font-mono text-muted-foreground uppercase tracking-widest bg-secondary/30 border border-border px-4 py-2 rounded-sm">
                             <FileText size={14} />
                             <span>Effective: Nov 14, 2025</span>
                         </div>
@@ -151,15 +152,15 @@ const Terms: React.FC = () => {
                 {/* Sidebar Navigation */}
                 <div className="hidden lg:block lg:col-span-3 relative">
                     <div className="sticky top-32">
-                        <div className="mb-6 font-mono text-[10px] text-gray-500 uppercase tracking-widest">Table of Contents</div>
+                        <div className="mb-6 font-mono text-[10px] text-muted-foreground uppercase tracking-widest">Table of Contents</div>
                         <TableOfContents />
                         
-                        <div className="mt-12 pt-8 border-t border-white/5">
-                             <div className="flex items-center gap-2 text-white/40 mb-4">
+                        <div className="mt-12 pt-8 border-t border-border">
+                             <div className="flex items-center gap-2 text-muted-foreground/60 mb-4">
                                 <ShieldAlert size={16} />
                                 <span className="font-mono text-[10px] uppercase tracking-widest">Legal Entity</span>
                              </div>
-                             <p className="text-xs text-gray-500 leading-relaxed font-light">
+                             <p className="text-xs text-muted-foreground leading-relaxed font-light">
                                 Global Fellowship Inc.<br/>
                                 501(c)(3) Nonprofit<br/>
                                 EIN: 68-0214543
@@ -204,8 +205,8 @@ const Terms: React.FC = () => {
                                         "Transmit any unsolicited or unauthorized advertising, promotional materials, 'junk mail,' 'spam,' 'chain letters,' 'pyramid schemes,' or any other form of solicitation."
                                     ].map((item, i) => (
                                         <li key={i} className="flex gap-4 items-start group/item">
-                                            <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-white/20 group-hover/item:bg-primary transition-colors" />
-                                            <span className="text-gray-400 group-hover/item:text-gray-300 transition-colors">{item}</span>
+                                            <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-muted-foreground/40 group-hover/item:bg-primary transition-colors" />
+                                            <span className="text-muted-foreground group-hover/item:text-foreground transition-colors">{item}</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -215,9 +216,9 @@ const Terms: React.FC = () => {
                                 <p>
                                     The Service and its original content (excluding Content provided by users), features and functionality are and will remain the exclusive property of Global Fellowship Inc. and its licensors. The Service is protected by copyright, trademark, and other laws of both the United States and foreign countries.
                                 </p>
-                                <div className="bg-white/[0.02] border border-white/10 p-6 rounded-sm mt-6">
-                                    <strong className="text-white block font-display mb-2">Open Source Components</strong>
-                                    <p className="text-sm">
+                                <div className="bg-card border border-border p-6 rounded-sm mt-6">
+                                    <strong className="text-foreground block font-display mb-2">Open Source Components</strong>
+                                    <p className="text-sm text-muted-foreground">
                                         Certain components of the Service are released under open source licenses. Your use of those components is governed by the applicable open source license.
                                     </p>
                                 </div>
@@ -226,15 +227,15 @@ const Terms: React.FC = () => {
                             <TermSection id="payment" number="06" title="Payment, Billing, and Donations">
                                 <div className="space-y-8">
                                     <div>
-                                        <h4 className="text-white font-bold mb-2 font-display">6.1 SaaS Subscriptions</h4>
+                                        <h4 className="text-foreground font-bold mb-2 font-display">6.1 SaaS Subscriptions</h4>
                                         <p>Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring and periodic basis ("Billing Cycle"). Billing cycles are set either on a monthly or annual basis. Your subscription will automatically renew at the end of each Billing Cycle unless you cancel it.</p>
                                     </div>
                                     <div>
-                                        <h4 className="text-white font-bold mb-2 font-display">6.2 Donations</h4>
+                                        <h4 className="text-foreground font-bold mb-2 font-display">6.2 Donations</h4>
                                         <p>Donations made through the "Give" page are processed as charitable contributions to Global Fellowship Inc., a 501(c)(3) nonprofit organization.</p>
                                     </div>
                                     <div>
-                                        <h4 className="text-white font-bold mb-2 font-display">6.3 Currency</h4>
+                                        <h4 className="text-foreground font-bold mb-2 font-display">6.3 Currency</h4>
                                         <p>All transactions are processed in United States Dollars (USD) unless otherwise explicitly stated.</p>
                                     </div>
                                 </div>
@@ -243,15 +244,15 @@ const Terms: React.FC = () => {
                             <TermSection id="refunds" number="07" title="Refund and Cancellation Policy">
                                 <ul className="space-y-6">
                                     <li className="block">
-                                        <span className="text-white font-bold block mb-1 font-display">7.1 Subscription Cancellation</span>
+                                        <span className="text-foreground font-bold block mb-1 font-display">7.1 Subscription Cancellation</span>
                                         You may cancel your Subscription renewal either through your online account management page or by contacting our customer support team. Cancellation takes effect at the end of the current billing period.
                                     </li>
                                     <li className="block">
-                                        <span className="text-white font-bold block mb-1 font-display">7.2 Subscription Refunds</span>
+                                        <span className="text-foreground font-bold block mb-1 font-display">7.2 Subscription Refunds</span>
                                         Payments are non-refundable and there are no refunds or credits for partially used periods.
                                     </li>
                                     <li className="block">
-                                        <span className="text-white font-bold block mb-1 font-display">7.3 Donation Refunds</span>
+                                        <span className="text-foreground font-bold block mb-1 font-display">7.3 Donation Refunds</span>
                                         Donations are generally non-refundable. If you have made an error in making your donation or change your mind about contributing, please contact us at info@asymmetric.al within 7 days. Refunds are granted at our discretion or in the event of a proven technical error.
                                     </li>
                                 </ul>
@@ -259,13 +260,13 @@ const Terms: React.FC = () => {
 
                             <TermSection id="delivery" number="08" title="Delivery Policy">
                                 <div className="grid md:grid-cols-2 gap-6">
-                                    <div className="p-6 border border-white/5 bg-white/[0.02] rounded-sm">
-                                        <span className="text-white font-bold block mb-2 font-display">8.1 Digital Goods</span>
-                                        <p className="text-sm">Upon successful payment for a Subscription, access to the Service is granted immediately. Login credentials and access instructions are provided electronically via the email address associated with your account.</p>
+                                    <div className="p-6 border border-border bg-card rounded-sm">
+                                        <span className="text-foreground font-bold block mb-2 font-display">8.1 Digital Goods</span>
+                                        <p className="text-sm text-muted-foreground">Upon successful payment for a Subscription, access to the Service is granted immediately. Login credentials and access instructions are provided electronically via the email address associated with your account.</p>
                                     </div>
-                                    <div className="p-6 border border-white/5 bg-white/[0.02] rounded-sm">
-                                        <span className="text-white font-bold block mb-2 font-display">8.2 Donation Receipts</span>
-                                        <p className="text-sm">Tax-deductible receipts for donations are delivered electronically immediately upon successful processing of the gift.</p>
+                                    <div className="p-6 border border-border bg-card rounded-sm">
+                                        <span className="text-foreground font-bold block mb-2 font-display">8.2 Donation Receipts</span>
+                                        <p className="text-sm text-muted-foreground">Tax-deductible receipts for donations are delivered electronically immediately upon successful processing of the gift.</p>
                                     </div>
                                 </div>
                             </TermSection>
@@ -303,18 +304,18 @@ const Terms: React.FC = () => {
                         </div>
 
                         {/* Footer Contact */}
-                        <div className="mt-20 pt-12 border-t border-white/10">
-                            <h4 className="text-2xl font-display font-bold text-white mb-8">Contact Us</h4>
+                        <div className="mt-20 pt-12 border-t border-border">
+                            <h4 className="text-2xl font-display font-bold text-foreground mb-8">Contact Us</h4>
                             <div className="grid md:grid-cols-2 gap-8">
                                 <div>
-                                    <p className="text-gray-400 mb-4 font-light text-sm">If you have any questions about these Terms, please contact us:</p>
-                                    <a href="mailto:info@asymmetric.al" className="inline-flex items-center gap-2 text-white hover:text-primary transition-colors font-mono text-sm uppercase tracking-wider group">
+                                    <p className="text-muted-foreground mb-4 font-light text-sm">If you have any questions about these Terms, please contact us:</p>
+                                    <a href="mailto:info@asymmetric.al" className="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors font-mono text-sm uppercase tracking-wider group">
                                         info@asymmetric.al <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                                     </a>
                                 </div>
                                 <div>
-                                    <strong className="text-white block mb-4 font-display">Mailing Address</strong>
-                                    <address className="not-italic text-gray-400 font-light text-sm leading-relaxed">
+                                    <strong className="text-foreground block mb-4 font-display">Mailing Address</strong>
+                                    <address className="not-italic text-muted-foreground font-light text-sm leading-relaxed">
                                         Global Fellowship Inc.<br/>
                                         Attn: Asymmetric.al<br/>
                                         PO Box 1<br/>

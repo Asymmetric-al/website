@@ -11,6 +11,7 @@ import {
     DitherGlobe, ScrambleText, Input, TextArea
 } from '../components/UI';
 import { ButtonVariant } from '../types';
+import { cn } from '../lib/utils';
 
 // --- Types ---
 
@@ -55,7 +56,7 @@ interface FocusCardProps {
 const MISSION_CONTROL_TILES: readonly MissionTile[] = [
     { 
         title: "Partners CRM", 
-        desc: <>Powered by a custom Missions Built <a href="https://github.com/twentyhq/twenty" target="_blank" rel="noreferrer" className="text-white hover:text-primary underline decoration-white/30 transition-colors">Twenty CRM</a>, the open-source standard with 40k GitHub Stars. The definitive source of truth for people, churches, and pledges. A living record that updates in real-time, managed with a modern interface designed for speed. A CRM your Advancement team will actually enjoy using.</>,
+        desc: <>Powered by a custom Missions Built <a href="https://github.com/twentyhq/twenty" target="_blank" rel="noreferrer" className="text-foreground hover:text-primary underline decoration-border transition-colors">Twenty CRM</a>, the open-source standard with 40k GitHub Stars. The definitive source of truth for people, churches, and pledges. A living record that updates in real-time, managed with a modern interface designed for speed. A CRM your Advancement team will actually enjoy using.</>,
         icon: Database,
         meta: "// CORE RECORD"
     },
@@ -67,7 +68,7 @@ const MISSION_CONTROL_TILES: readonly MissionTile[] = [
     },
     { 
         title: "Web Studio", 
-        desc: <>The power of <a href="https://nextjs.org/" target="_blank" rel="noreferrer" className="text-white hover:text-primary underline decoration-white/30 transition-colors">Next.js</a> with the ease of a visual CMS (A headless WordPress). Whether you have a frontend team or just need to update the blog, you are in control. No more change orders for simple button tweaks. Build on open standards, not proprietary cages.</>,
+        desc: <>The power of <a href="https://nextjs.org/" target="_blank" rel="noreferrer" className="text-foreground hover:text-primary underline decoration-border transition-colors">Next.js</a> with the ease of a visual CMS (A headless WordPress). Whether you have a frontend team or just need to update the blog, you are in control. No more change orders for simple button tweaks. Build on open standards, not proprietary cages.</>,
         icon: Globe,
         meta: "// CMS"
     },
@@ -79,7 +80,7 @@ const MISSION_CONTROL_TILES: readonly MissionTile[] = [
     },
     {
         title: "Donor Support Hub",
-        desc: <>Integrated <a href="https://github.com/chatwoot/chatwoot" target="_blank" rel="noreferrer" className="text-white hover:text-primary underline decoration-white/30 transition-colors">Chatwoot CE</a> to handle all donor issues with easy tracking to make sure no donor question gets dropped or missed. Donor care is vital to any missions organization. All integrated into your Mission Control Panel.</>,
+        desc: <>Integrated <a href="https://github.com/chatwoot/chatwoot" target="_blank" rel="noreferrer" className="text-foreground hover:text-primary underline decoration-border transition-colors">Chatwoot CE</a> to handle all donor issues with easy tracking to make sure no donor question gets dropped or missed. Donor care is vital to any missions organization. All integrated into your Mission Control Panel.</>,
         icon: MessageCircle,
         meta: "// SUPPORT"
     },
@@ -91,7 +92,7 @@ const MISSION_CONTROL_TILES: readonly MissionTile[] = [
     },
     { 
         title: "Sign Studio", 
-        desc: <>No need for DocuSign anymore. Powered by <a href="https://github.com/documenso/documenso" target="_blank" rel="noreferrer" className="text-white hover:text-primary underline decoration-white/30 transition-colors">Documenso CE</a>, fully integrated in your mobilization and onboarding workflow. One integrated place to handle agreements, waivers, and packets.</>,
+        desc: <>No need for DocuSign anymore. Powered by <a href="https://github.com/documenso/documenso" target="_blank" rel="noreferrer" className="text-foreground hover:text-primary underline decoration-border transition-colors">Documenso CE</a>, fully integrated in your mobilization and onboarding workflow. One integrated place to handle agreements, waivers, and packets.</>,
         icon: PenTool,
         meta: "// LEGAL"
     },
@@ -175,56 +176,70 @@ const PROBLEM_OPTIONS: readonly ProblemOption[] = [
 // --- Sub-Components ---
 
 const MissionCard = memo(({ tile }: MissionCardProps) => (
-    <div className={`
-        group relative h-full flex flex-col justify-between
-        bg-black border rounded-sm overflow-hidden transition-all duration-300
-        ${tile.highlight 
+    <div className={cn(
+        "group relative h-full flex flex-col justify-between bg-card border rounded-sm overflow-hidden transition-all duration-300",
+        tile.highlight 
             ? 'border-primary/40 shadow-[0_0_0_1px_rgba(16,185,129,0.1)]' 
-            : 'border-white/10 hover:border-white/20'}
-    `}>
+            : 'border-border hover:border-foreground/20'
+    )}>
         {/* Header */}
-        <div className="p-8 flex justify-between items-start border-b border-white/5 bg-white/[0.01]">
-            <div className={`
-                flex items-center justify-center w-10 h-10 rounded-sm border transition-colors
-                ${tile.highlight 
-                    ? 'bg-primary/10 border-primary/20 text-primary' 
-                    : 'bg-white/5 border-white/10 text-gray-400 group-hover:text-white group-hover:border-white/30'}
-            `}>
+        <div className="p-8 flex justify-between items-start border-b border-border bg-card">
+            <div className={cn(
+                "flex items-center justify-center w-10 h-10 rounded-sm border transition-colors",
+                tile.highlight 
+                    ? 'bg-primary/10 border-primary/20 text-primary dark:text-primary' 
+                    : 'bg-secondary border-border text-muted-foreground group-hover:text-foreground group-hover:border-foreground/30'
+            )}>
                 <tile.icon size={20} strokeWidth={1.5} />
             </div>
-            <span className={`
-                font-mono text-[9px] uppercase tracking-widest mt-2
-                ${tile.highlight ? 'text-primary' : 'text-white/30 group-hover:text-white/60 transition-colors'}
-            `}>
+            <span className={cn(
+                "font-mono text-[9px] uppercase tracking-widest mt-2",
+                tile.highlight 
+                    ? 'text-emerald-600 dark:text-primary' 
+                    : 'text-muted-foreground group-hover:text-foreground/60 transition-colors'
+            )}>
                 {tile.meta}
             </span>
         </div>
 
         {/* Content */}
-        <div className="p-8 flex-grow relative">
+        <div className="p-8 flex-grow relative bg-card">
              <div className="relative z-10">
-                <h3 className={`
-                    text-xl font-display font-bold mb-4 tracking-tight transition-colors
-                    ${tile.highlight ? 'text-white' : 'text-white group-hover:text-primary'}
-                `}>
+                <h3 className={cn(
+                    "text-xl font-display font-bold mb-4 tracking-tight transition-colors",
+                    tile.highlight 
+                        ? 'text-foreground' 
+                        : 'text-foreground group-hover:text-primary'
+                )}>
                     {tile.title}
                 </h3>
-                <div className="text-sm text-gray-400 leading-relaxed font-light text-balance">
+                <div className="text-sm text-muted-foreground leading-relaxed font-light text-balance">
                     {tile.desc}
                 </div>
             </div>
         </div>
 
         {/* Status Bar */}
-        <div className={`
-            px-8 py-4 border-t flex items-center gap-3
-            ${tile.highlight ? 'bg-primary/5 border-primary/20' : 'bg-white/[0.01] border-white/5'}
-        `}>
+        <div className={cn(
+            "px-8 py-4 border-t flex items-center gap-3",
+            tile.highlight 
+                ? 'bg-primary/5 border-primary/20' 
+                : 'bg-background border-border'
+        )}>
             <div className="relative flex h-1.5 w-1.5">
-                <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${tile.highlight ? 'bg-primary' : 'bg-success'}`}></span>
-                <span className={`relative inline-flex rounded-full h-1.5 w-1.5 ${tile.highlight ? 'bg-primary' : 'bg-success'}`}></span>
+                <span className={cn(
+                    "animate-ping absolute inline-flex h-full w-full rounded-full opacity-75",
+                    tile.highlight ? 'bg-primary' : 'bg-success'
+                )} />
+                <span className={cn(
+                    "relative inline-flex rounded-full h-1.5 w-1.5",
+                    tile.highlight ? 'bg-primary' : 'bg-success'
+                )} />
             </div>
-            <span className={`font-mono text-[9px] uppercase tracking-widest ${tile.highlight ? 'text-primary' : 'text-white/30'}`}>
+            <span className={cn(
+                "font-mono text-[9px] uppercase tracking-widest",
+                tile.highlight ? 'text-emerald-600 dark:text-primary' : 'text-muted-foreground'
+            )}>
                 {tile.highlight ? 'Continuous Deployment' : 'System Active'}
             </span>
         </div>
@@ -244,58 +259,73 @@ const FalseChoicePanel = memo(({ option }: FalseChoicePanelProps) => {
         };
     }, [option.title]);
 
-    // Theme logic
-    const themeColor = isDIY ? 'orange' : 'blue';
-    const borderColor = isDIY ? 'group-hover:border-orange-500/30' : 'group-hover:border-blue-500/30';
-    const iconColor = isDIY ? 'text-orange-500' : 'text-blue-500';
+    // Theme logic - Adapted for light/dark mode contrast
+    const borderColor = isDIY 
+        ? 'group-hover:border-orange-500/50 dark:group-hover:border-orange-500/30' 
+        : 'group-hover:border-blue-500/50 dark:group-hover:border-blue-500/30';
+    
+    const iconColor = isDIY 
+        ? 'text-orange-600 dark:text-orange-500' 
+        : 'text-blue-600 dark:text-blue-500';
+
+    const subtitleColor = isDIY 
+        ? 'text-orange-600 dark:text-orange-400' 
+        : 'text-blue-600 dark:text-blue-400';
+
+    const lineColor = isDIY 
+        ? 'bg-orange-500/50' 
+        : 'bg-blue-500/50';
 
     return (
-        <div className={`
-            bg-black h-full border border-white/10 ${borderColor} transition-colors duration-500 
-            group relative overflow-hidden flex flex-col rounded-sm
-        `}>
+        <div className={cn(
+            "bg-card h-full border border-border transition-colors duration-500 group relative overflow-hidden flex flex-col rounded-sm",
+            borderColor
+        )}>
             {/* Corner Markers (Standardized) */}
-            <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true">
-                <div className="absolute top-0 left-0 w-2 h-2 border-l border-t border-white/20" />
-                <div className="absolute top-0 right-0 w-2 h-2 border-r border-t border-white/20" />
-                <div className="absolute bottom-0 left-0 w-2 h-2 border-l border-bottom border-white/20" />
-                <div className="absolute bottom-0 right-0 w-2 h-2 border-r border-bottom border-white/20" />
+            <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-border" aria-hidden="true">
+                <div className="absolute top-0 left-0 w-2 h-2 border-l border-t border-current" />
+                <div className="absolute top-0 right-0 w-2 h-2 border-r border-t border-current" />
+                <div className="absolute bottom-0 left-0 w-2 h-2 border-l border-bottom border-current" />
+                <div className="absolute bottom-0 right-0 w-2 h-2 border-r border-bottom border-current" />
             </div>
 
             <div className="relative z-10 flex flex-col h-full p-8 md:p-10">
                 
                 {/* Header */}
                 <div className="flex justify-between items-start mb-10">
-                    <div className={`p-3 rounded-sm border bg-white/5 border-white/10 ${iconColor} transition-colors`}>
+                    <div className={cn(
+                        "p-3 rounded-sm border bg-secondary border-border transition-colors",
+                        iconColor
+                    )}>
                         <option.icon size={24} strokeWidth={1.5} />
                     </div>
-                    <span className="font-mono text-[10px] font-bold text-white/40 uppercase tracking-widest bg-white/5 px-3 py-1.5 rounded-sm border border-white/5">
+                    <span className="font-mono text-[10px] font-bold text-muted-foreground uppercase tracking-widest bg-secondary px-3 py-1.5 rounded-sm border border-border">
                         {label}
                     </span>
                 </div>
 
                 {/* Content */}
                 <div className="mb-8">
-                    <h3 className="text-2xl font-display font-bold text-white mb-4 tracking-tight group-hover:text-white/90 transition-colors">
+                    <h3 className="text-2xl font-display font-bold text-foreground mb-4 tracking-tight group-hover:text-foreground/90 transition-colors">
                         {headline}
                     </h3>
-                    <div className={`flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest ${isDIY ? 'text-orange-400' : 'text-blue-400'} mb-6`}>
-                        <div className={`h-px w-6 ${isDIY ? 'bg-orange-500/50' : 'bg-blue-500/50'}`} />
+                    <div className={cn("flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest mb-6", subtitleColor)}>
+                        <div className={cn("h-px w-6", lineColor)} />
                         {option.subtitle}
                     </div>
-                    <p className="text-gray-400 text-sm leading-relaxed border-l border-white/10 pl-6 text-balance">
+                    <p className="text-muted-foreground text-sm leading-relaxed border-l border-border pl-6 text-balance">
                         {option.desc}
                     </p>
                 </div>
 
                 {/* Footer List */}
-                <div className="mt-auto pt-8 border-t border-white/5">
-                     <div className="text-[9px] font-mono text-white/30 uppercase tracking-widest mb-4">Critical Failures</div>
+                <div className="mt-auto pt-8 border-t border-border">
+                     <div className="text-[9px] font-mono text-muted-foreground uppercase tracking-widest mb-4">Critical Failures</div>
                      <ul className="space-y-4">
                         {option.points.map((point, i) => (
-                            <li key={i} className="text-[11px] font-mono text-white/60 flex items-center gap-3 group/list">
-                                <div className="w-1 h-1 bg-red-500 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.5)]"></div>
-                                <span className="group-hover/list:text-white transition-colors tracking-wider">{point}</span>
+                            <li key={i} className="text-[11px] font-mono text-muted-foreground flex items-center gap-3 group/list">
+                                <div className="w-1 h-1 bg-destructive rounded-full shadow-[0_0_8px_rgba(239,68,68,0.5)]"></div>
+                                <span className="group-hover/list:text-foreground transition-colors tracking-wider">{point}</span>
                             </li>
                         ))}
                     </ul>
@@ -307,13 +337,13 @@ const FalseChoicePanel = memo(({ option }: FalseChoicePanelProps) => {
 FalseChoicePanel.displayName = 'FalseChoicePanel';
 
 const FocusCard = memo(({ item }: FocusCardProps) => (
-    <SpotlightCard className="h-full bg-black flex flex-col justify-between group rounded-sm border-white/10 hover:border-white/20">
+    <SpotlightCard className="h-full bg-card flex flex-col justify-between group rounded-sm border-border hover:border-foreground/20">
         <div className="p-8 md:p-10 h-full flex flex-col">
-            <div className="mb-8 p-3 bg-white/5 w-fit rounded-sm border border-white/10 text-white group-hover:text-primary transition-colors">
+            <div className="mb-8 p-3 bg-secondary w-fit rounded-sm border border-border text-foreground group-hover:text-primary transition-colors">
                 <item.icon size={24} strokeWidth={1.5} />
             </div>
-            <h3 className="text-2xl font-display font-bold text-white mb-4 tracking-tight">{item.title}</h3>
-            <p className="text-muted leading-relaxed text-sm text-balance border-l border-white/10 pl-6 mt-auto">{item.desc}</p>
+            <h3 className="text-2xl font-display font-bold text-foreground mb-4 tracking-tight">{item.title}</h3>
+            <p className="text-muted-foreground leading-relaxed text-sm text-balance border-l border-border pl-6 mt-auto">{item.desc}</p>
         </div>
     </SpotlightCard>
 ));
@@ -327,8 +357,8 @@ const DeploymentForm = memo(() => {
 
     return (
         <form className="space-y-0 relative group" onSubmit={handleSubmit}>
-            <div className="relative bg-black border border-white/10 rounded-sm p-8 md:p-10 space-y-6">
-                <div className="flex items-center gap-2 mb-6 text-white/40">
+            <div className="relative bg-card border border-border rounded-sm p-8 md:p-10 space-y-6">
+                <div className="flex items-center gap-2 mb-6 text-muted-foreground">
                     <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
                     <span className="font-mono text-[10px] uppercase tracking-widest">Secure Uplink</span>
                 </div>
@@ -345,7 +375,7 @@ const DeploymentForm = memo(() => {
                 />
                 
                 <div className="pt-2">
-                    <Button className="w-full h-14 bg-white text-black hover:bg-primary hover:text-white border-none font-bold tracking-wide" icon={<ArrowRight size={16} />}>
+                    <Button className="w-full h-14 font-bold tracking-wide" icon={<ArrowRight size={16} />}>
                         Start the Conversation
                     </Button>
                 </div>
@@ -356,7 +386,7 @@ const DeploymentForm = memo(() => {
 DeploymentForm.displayName = 'DeploymentForm';
 
 const PlatformHero = memo(() => (
-    <Section className="border-b border-white/5 relative !pb-0 md:!pb-12">
+    <Section className="border-b border-border relative !pb-0 md:!pb-12 bg-background">
         <DitherGrid />
         
         {/* Layer 0: Main Background Globe (Right aligned) */}
@@ -366,21 +396,21 @@ const PlatformHero = memo(() => (
 
         <Reveal>
             <div className="max-w-4xl">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 bg-white/5 rounded-full text-[10px] font-mono uppercase tracking-widest text-muted mb-8 backdrop-blur-md">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-border bg-secondary/50 rounded-full text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-8 backdrop-blur-md">
                     <span className="w-1.5 h-1.5 bg-success rounded-full animate-pulse"></span>
                     <ScrambleText text="MISSION OPERATING SYSTEM" delay={200} />
                 </div>
 
-                <h1 className="text-6xl md:text-8xl font-display font-bold text-white mb-8 tracking-tighter leading-[0.9]">
+                <h1 className="text-6xl md:text-8xl font-display font-bold text-foreground mb-8 tracking-tighter leading-[0.9]">
                     One Surface.<br /> 
-                    <span className="text-muted">Total Clarity.</span>
+                    <span className="text-muted-foreground">Total Clarity.</span>
                 </h1>
                 
-                <div className="pl-6 border-l-2 border-white/10 mb-12">
-                    <p className="text-xl text-gray-400 max-w-2xl font-light leading-relaxed text-balance">
+                <div className="pl-6 border-l-2 border-border mb-12">
+                    <p className="text-xl text-muted-foreground max-w-2xl font-light leading-relaxed text-balance">
                         Most agencies are running on a patchwork of disconnected tools. Data is siloed. Staff are exhausted. The mission slows down.
                     </p>
-                    <p className="text-lg text-gray-500 max-w-2xl font-light leading-relaxed text-balance mt-4">
+                    <p className="text-lg text-muted-foreground/80 max-w-2xl font-light leading-relaxed text-balance mt-4">
                         Asymmetric.al replaces the chaos of the "DIY stack" with a single, unified operating system designed specifically for the complexities of sending.
                     </p>
                 </div>
@@ -396,23 +426,23 @@ const PlatformHero = memo(() => (
 PlatformHero.displayName = 'PlatformHero';
 
 const FalseChoiceSection = memo(() => (
-    <Section className="bg-white/[0.02] relative border-b border-white/5">
+    <Section className="bg-card relative border-b border-border">
         <Reveal>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-stretch">
               <div className="lg:col-span-5 flex flex-col justify-center">
-                  <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6 tracking-tight leading-[1.1]">
+                  <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-6 tracking-tight leading-[1.1]">
                       The "False Choice"<br/>facing agencies today.
                   </h2>
-                  <p className="text-muted leading-relaxed text-lg mb-12 text-balance font-light">
+                  <p className="text-muted-foreground leading-relaxed text-lg mb-12 text-balance font-light">
                       For decades, mission leaders have been forced to choose between two failing options. This compromise drains resources and slows deployment.
                   </p>
                   
-                  <div className="p-8 border border-red-500/20 bg-red-950/10 rounded-sm">
-                      <div className="flex items-center gap-3 text-red-400 mb-4 font-mono text-xs uppercase tracking-widest">
+                  <div className="p-8 border border-destructive/20 bg-destructive/5 rounded-sm">
+                      <div className="flex items-center gap-3 text-destructive mb-4 font-mono text-xs uppercase tracking-widest">
                           <AlertTriangle size={14} />
                           System Warning
                       </div>
-                      <p className="text-red-200/80 text-sm leading-relaxed italic border-l border-red-500/20 pl-4">
+                      <p className="text-destructive/80 text-sm leading-relaxed italic border-l border-destructive/20 pl-4">
                           "Our ops, mobilization, and finance teams are spending more time managing our tools than we are supporting our missionaries." — Common Agency Feedback
                       </p>
                   </div>
@@ -430,7 +460,7 @@ const FalseChoiceSection = memo(() => (
 FalseChoiceSection.displayName = 'FalseChoiceSection';
 
 const WhyFocusSection = memo(() => (
-    <Section grid className="bg-black border-b border-white/5 relative overflow-hidden">
+    <Section grid className="bg-background border-b border-border relative overflow-hidden">
         {/* Subtle Globe Center */}
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-10 pointer-events-none" aria-hidden="true">
             <DitherGlobe scale={1.2} />
@@ -438,8 +468,8 @@ const WhyFocusSection = memo(() => (
 
         <div className="text-center max-w-3xl mx-auto mb-20 relative z-10">
              <Reveal>
-                <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6 tracking-tight">Why we focus here.</h2>
-                <p className="text-xl text-gray-400 font-light leading-relaxed text-balance">
+                <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-6 tracking-tight">Why we focus here.</h2>
+                <p className="text-xl text-muted-foreground font-light leading-relaxed text-balance">
                     We aren't trying to build software for everyone. We are hyper-focused on the unique complexities of sending agencies.
                 </p>
              </Reveal>
@@ -457,10 +487,10 @@ const WhyFocusSection = memo(() => (
 WhyFocusSection.displayName = 'WhyFocusSection';
 
 const MissionControlSection = memo(() => (
-    <Section id="mission-control" className="bg-black relative overflow-hidden border-b border-white/5">
+    <Section id="mission-control" className="bg-background relative overflow-hidden border-b border-border">
         {/* Decorative Dither Grid */}
-        <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
-             style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '30px 30px' }}
+        <div className="absolute inset-0 opacity-[0.05]" 
+             style={{ backgroundImage: 'radial-gradient(var(--foreground) 1px, transparent 1px)', backgroundSize: '30px 30px' }}
              aria-hidden="true"
         />
 
@@ -473,17 +503,17 @@ const MissionControlSection = memo(() => (
                         <span className="font-mono text-xs text-success uppercase tracking-widest">The Unified Solution</span>
                     </div>
                     
-                    <h2 className="text-5xl md:text-7xl font-display font-bold text-white mb-8 tracking-tighter leading-[0.9]">
+                    <h2 className="text-5xl md:text-7xl font-display font-bold text-foreground mb-8 tracking-tighter leading-[0.9]">
                         Mission Control
                     </h2>
                     
-                    <div className="h-px w-24 bg-gradient-to-r from-transparent via-white/40 to-transparent mx-auto mb-8" />
+                    <div className="h-px w-24 bg-gradient-to-r from-transparent via-foreground/40 to-transparent mx-auto mb-8" />
 
-                    <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed text-balance mb-8">
+                    <p className="text-xl md:text-2xl text-muted-foreground font-light leading-relaxed text-balance mb-8">
                         Replace the clutter with cohesion. Every operational function under one login, sharing one database.
                     </p>
                     
-                    <p className="text-gray-500 max-w-2xl mx-auto leading-relaxed text-balance">
+                    <p className="text-muted-foreground/80 max-w-2xl mx-auto leading-relaxed text-balance">
                         No more "integration tax." No more zapping data between five different SaaS tools. 
                         Just one sovereign operating system designed to run the work of the Great Commission.
                     </p>
@@ -504,35 +534,35 @@ const MissionControlSection = memo(() => (
 MissionControlSection.displayName = 'MissionControlSection';
 
 const DeploymentSection = memo(() => (
-    <Section id="contact" className="relative overflow-hidden bg-white/[0.02]">
+    <Section id="contact" className="relative overflow-hidden bg-card">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 relative z-10 items-center">
             <Reveal>
                 <div className="flex items-center gap-2 mb-6 text-primary">
                     <Heart size={16} />
                     <span className="font-mono text-xs uppercase tracking-widest">Partnership Model</span>
                 </div>
-                <h2 className="text-5xl md:text-6xl font-display font-bold text-white mb-8 tracking-tighter leading-[0.9]">
+                <h2 className="text-5xl md:text-6xl font-display font-bold text-foreground mb-8 tracking-tighter leading-[0.9]">
                     Let's build<br/>the future.
                 </h2>
-                <p className="text-muted mb-12 leading-relaxed max-w-md text-balance text-lg border-l border-white/10 pl-6">
+                <p className="text-muted-foreground mb-12 leading-relaxed max-w-md text-balance text-lg border-l border-border pl-6">
                     We are looking for agencies who are tired of the status quo. If you are ready to modernize your operations and steward your data, we want to talk.
                 </p>
-                <ul className="space-y-6 font-mono text-xs text-muted uppercase tracking-widest">
+                <ul className="space-y-6 font-mono text-xs text-muted-foreground uppercase tracking-widest">
                     <li className="flex items-center gap-4 group">
-                        <div className="p-1 border border-white/10 rounded-full group-hover:border-primary/50 transition-colors">
-                            <div className="w-1.5 h-1.5 bg-white rounded-full group-hover:bg-primary transition-colors"></div>
+                        <div className="p-1 border border-border rounded-full group-hover:border-primary/50 transition-colors">
+                            <div className="w-1.5 h-1.5 bg-foreground rounded-full group-hover:bg-primary transition-colors"></div>
                         </div>
                         Early Access Program
                     </li>
                     <li className="flex items-center gap-4 group">
-                         <div className="p-1 border border-white/10 rounded-full group-hover:border-primary/50 transition-colors">
-                            <div className="w-1.5 h-1.5 bg-white rounded-full group-hover:bg-primary transition-colors"></div>
+                         <div className="p-1 border border-border rounded-full group-hover:border-primary/50 transition-colors">
+                            <div className="w-1.5 h-1.5 bg-foreground rounded-full group-hover:bg-primary transition-colors"></div>
                         </div>
                         Data Migration Support
                     </li>
                     <li className="flex items-center gap-4 group">
-                         <div className="p-1 border border-white/10 rounded-full group-hover:border-primary/50 transition-colors">
-                            <div className="w-1.5 h-1.5 bg-white rounded-full group-hover:bg-primary transition-colors"></div>
+                         <div className="p-1 border border-border rounded-full group-hover:border-primary/50 transition-colors">
+                            <div className="w-1.5 h-1.5 bg-foreground rounded-full group-hover:bg-primary transition-colors"></div>
                         </div>
                         Open Source Contribution
                     </li>
@@ -551,7 +581,7 @@ DeploymentSection.displayName = 'DeploymentSection';
 
 const Platform: React.FC = () => {
   return (
-    <div className="pt-24 min-h-screen bg-black text-white overflow-hidden selection:bg-white selection:text-black">
+    <div className="pt-24 min-h-screen bg-background text-foreground overflow-hidden selection:bg-foreground selection:text-background">
       <PlatformHero />
       <FalseChoiceSection />
       <WhyFocusSection />

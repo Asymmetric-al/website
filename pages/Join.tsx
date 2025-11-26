@@ -169,33 +169,33 @@ const OPEN_ROLES: readonly RoleItem[] = [
 // --- Sub-Components ---
 
 const PathwayCard = memo(({ pathway, onScroll }: PathwayCardProps) => (
-    <SpotlightCard className="h-full bg-black border-white/10 group rounded-sm hover:border-white/20 transition-all duration-500">
+    <SpotlightCard className="h-full bg-card border-border group rounded-sm hover:border-foreground/30 transition-all duration-500">
         <div className="flex flex-col justify-between h-full p-8 md:p-10">
             <div>
                 <div className="flex justify-between items-start mb-8">
-                    <div className="p-3 bg-white/5 rounded-sm border border-white/10 group-hover:border-primary/50 group-hover:text-primary transition-colors text-gray-400">
+                    <div className="p-3 bg-secondary rounded-sm border border-border group-hover:border-primary/50 group-hover:text-primary transition-colors text-muted-foreground">
                         <pathway.icon size={24} strokeWidth={1.5} />
                     </div>
                 </div>
                 
-                <div className="font-mono text-[10px] uppercase tracking-widest text-muted mb-4 border-l border-white/10 pl-3">
+                <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-4 border-l border-border pl-3">
                     {pathway.subtitle}
                 </div>
 
-                <h3 className="text-2xl font-display font-bold text-white mb-4 tracking-tight group-hover:text-white/90 transition-colors">
+                <h3 className="text-2xl font-display font-bold text-foreground mb-4 tracking-tight group-hover:text-foreground/90 transition-colors">
                     {pathway.title}
                 </h3>
                 
-                <p className="text-sm text-gray-400 leading-relaxed mb-8 text-balance font-light">
+                <p className="text-sm text-muted-foreground leading-relaxed mb-8 text-balance font-light">
                     {pathway.desc}
                 </p>
             </div>
 
-            <div className="pt-6 border-t border-white/5">
+            <div className="pt-6 border-t border-border">
                 {pathway.internal ? (
                     <button 
                         onClick={onScroll}
-                        className="text-xs font-mono text-white group-hover:text-primary transition-colors flex items-center gap-2 uppercase tracking-widest cursor-pointer w-fit focus:outline-none"
+                        className="text-xs font-mono text-foreground group-hover:text-primary transition-colors flex items-center gap-2 uppercase tracking-widest cursor-pointer w-fit focus:outline-none"
                     >
                         {pathway.action} <ArrowRight size={12} />
                     </button>
@@ -204,7 +204,7 @@ const PathwayCard = memo(({ pathway, onScroll }: PathwayCardProps) => (
                         href={pathway.link}
                         target={pathway.link.startsWith('http') ? "_blank" : undefined}
                         rel={pathway.link.startsWith('http') ? "noopener noreferrer" : undefined}
-                        className="text-xs font-mono text-white group-hover:text-primary transition-colors flex items-center gap-2 uppercase tracking-widest cursor-pointer w-fit"
+                        className="text-xs font-mono text-foreground group-hover:text-primary transition-colors flex items-center gap-2 uppercase tracking-widest cursor-pointer w-fit"
                     >
                         {pathway.action} <ArrowRight size={12} />
                     </a>
@@ -216,12 +216,12 @@ const PathwayCard = memo(({ pathway, onScroll }: PathwayCardProps) => (
 PathwayCard.displayName = 'PathwayCard';
 
 const ValueCard = memo(({ value }: ValueCardProps) => (
-    <div className="group h-full p-8 border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-colors rounded-sm flex flex-col">
-        <div className="mb-6 text-gray-500 group-hover:text-primary transition-colors">
+    <div className="group h-full p-8 border border-border bg-card hover:bg-secondary/20 transition-colors rounded-sm flex flex-col">
+        <div className="mb-6 text-muted-foreground group-hover:text-primary transition-colors">
             <value.icon size={24} strokeWidth={1.5} />
         </div>
-        <h3 className="text-xl font-display font-bold text-white mb-3 tracking-tight">{value.title}</h3>
-        <p className="text-sm text-gray-400 leading-relaxed text-balance font-light mt-auto">
+        <h3 className="text-xl font-display font-bold text-foreground mb-3 tracking-tight">{value.title}</h3>
+        <p className="text-sm text-muted-foreground leading-relaxed text-balance font-light mt-auto">
             {value.desc}
         </p>
     </div>
@@ -233,38 +233,38 @@ const RoleCard = memo(({ role }: RoleCardProps) => {
     const isSupportRaised = role.type.includes('Support');
     const badgeStyle = isSupportRaised 
         ? 'bg-success/10 text-success border-success/20'
-        : 'bg-white/10 text-white/80 border-white/10';
+        : 'bg-secondary text-muted-foreground border-border';
 
     return (
-        <TechPanel noBorder className="border border-white/10 bg-black hover:border-white/30 transition-all duration-300 group relative overflow-hidden">
-             <div className="absolute inset-0 bg-white/[0.01] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" aria-hidden="true" />
+        <TechPanel noBorder className="border border-border bg-card hover:border-foreground/30 transition-all duration-300 group relative overflow-hidden">
+             <div className="absolute inset-0 bg-background/30 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" aria-hidden="true" />
              
              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative z-10">
                  <div className="flex-1 space-y-3">
                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                         <h3 className="text-xl font-bold text-white font-display tracking-tight">{role.title}</h3>
+                         <h3 className="text-xl font-bold text-foreground font-display tracking-tight">{role.title}</h3>
                          <span className={`px-2 py-0.5 rounded-sm text-[10px] font-mono uppercase tracking-widest w-fit border ${badgeStyle}`}>
                             {role.type}
                          </span>
                      </div>
                      
-                     <p className="text-gray-400 text-sm max-w-2xl leading-relaxed font-light text-balance">{role.desc}</p>
+                     <p className="text-muted-foreground text-sm max-w-2xl leading-relaxed font-light text-balance">{role.desc}</p>
                      
                      <div className="flex flex-wrap items-center gap-3 pt-2">
-                         <div className="flex items-center gap-1.5 text-[10px] font-mono text-gray-500 uppercase tracking-widest bg-white/5 px-2 py-1 rounded-sm border border-white/5">
+                         <div className="flex items-center gap-1.5 text-[10px] font-mono text-muted-foreground uppercase tracking-widest bg-secondary px-2 py-1 rounded-sm border border-border">
                              <Code size={10} /> {role.stack}
                          </div>
-                         <div className="flex items-center gap-1.5 text-[10px] font-mono text-gray-500 uppercase tracking-widest bg-white/5 px-2 py-1 rounded-sm border border-white/5">
+                         <div className="flex items-center gap-1.5 text-[10px] font-mono text-muted-foreground uppercase tracking-widest bg-secondary px-2 py-1 rounded-sm border border-border">
                              <Globe size={10} /> {role.location}
                          </div>
                      </div>
                  </div>
                  
-                 <div className="flex items-center justify-end w-full md:w-auto pt-4 md:pt-0 border-t border-white/5 md:border-0">
+                 <div className="flex items-center justify-end w-full md:w-auto pt-4 md:pt-0 border-t border-border md:border-0">
                      <Link to="/contact" className="w-full md:w-auto">
                          <Button 
                             variant={ButtonVariant.SECONDARY} 
-                            className="w-full md:w-auto border-white/20 text-white hover:bg-white hover:!text-black hover:border-white transition-all duration-300"
+                            className="w-full md:w-auto border-border text-foreground hover:bg-foreground hover:!text-background hover:border-foreground transition-all duration-300"
                          >
                              Initiate <ArrowRight size={14} className="ml-2 group-hover:translate-x-1 transition-transform" />
                          </Button>
@@ -288,7 +288,7 @@ const Join: React.FC = () => {
   }, []);
 
   return (
-    <div className="pt-24 min-h-screen bg-black text-white selection:bg-white selection:text-black font-sans overflow-x-hidden">
+    <div className="pt-24 min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background font-sans overflow-x-hidden">
       <DitherGrid className="opacity-10 fixed inset-0 z-0" />
       
       {/* Background Globe */}
@@ -300,17 +300,17 @@ const Join: React.FC = () => {
       <Section className="relative z-10 !pb-12">
         <div className="max-w-5xl">
             <Reveal>
-                <div className="inline-flex items-center gap-2 px-3 py-1 border border-white/10 bg-white/5 rounded-full text-[10px] font-mono uppercase tracking-widest text-muted mb-8 backdrop-blur-md">
+                <div className="inline-flex items-center gap-2 px-3 py-1 border border-border bg-secondary/50 rounded-full text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-8 backdrop-blur-md">
                     <Terminal size={12} className="text-primary" />
                     <ScrambleText text="OPEN RECRUITMENT" delay={200} />
                 </div>
                 
-                <h1 className="text-6xl md:text-8xl font-display font-bold text-white mb-8 tracking-tighter leading-[0.9]">
+                <h1 className="text-6xl md:text-8xl font-display font-bold text-foreground mb-8 tracking-tighter leading-[0.9]">
                     Your code.<br/>
-                    <span className="text-muted">Their mission.</span>
+                    <span className="text-muted-foreground">Their mission.</span>
                 </h1>
                 
-                <p className="text-xl text-gray-400 font-light max-w-2xl leading-relaxed text-balance border-l border-white/20 pl-6 mb-12">
+                <p className="text-xl text-muted-foreground font-light max-w-2xl leading-relaxed text-balance border-l border-border pl-6 mb-12">
                     We are bridging the gap between Silicon Valley innovation and the Great Commission. 
                     If you are a builder looking to use your craft for something that outlasts you, you belong here.
                 </p>
@@ -322,8 +322,8 @@ const Join: React.FC = () => {
       <Section className="relative z-10 !pt-0">
           <Reveal>
              <div className="mb-12">
-                <h2 className="text-3xl font-display font-bold text-white mb-4 tracking-tight">How to Engage</h2>
-                <p className="text-gray-400 max-w-xl font-light leading-relaxed">There are three ways to join the mission, depending on your capacity and calling.</p>
+                <h2 className="text-3xl font-display font-bold text-foreground mb-4 tracking-tight">How to Engage</h2>
+                <p className="text-muted-foreground max-w-xl font-light leading-relaxed">There are three ways to join the mission, depending on your capacity and calling.</p>
              </div>
 
              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
@@ -335,11 +335,11 @@ const Join: React.FC = () => {
       </Section>
 
       {/* Culture / DNA Section */}
-      <Section className="bg-white/[0.02] border-y border-white/5 relative overflow-hidden">
+      <Section className="bg-card border-y border-border relative overflow-hidden">
           <Reveal>
             <div className="flex items-center gap-2 mb-12">
-                <Zap size={16} className="text-white/40" />
-                <h2 className="font-mono text-xs text-white uppercase tracking-widest">Engineering Values</h2>
+                <Zap size={16} className="text-muted-foreground/60" />
+                <h2 className="font-mono text-xs text-foreground uppercase tracking-widest">Engineering Values</h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
@@ -355,8 +355,8 @@ const Join: React.FC = () => {
           <Reveal>
              <div className="flex justify-between items-end mb-16">
                  <div>
-                    <h2 className="text-4xl font-display font-bold text-white tracking-tight mb-2">Active Deployments</h2>
-                    <p className="text-muted font-mono text-xs uppercase tracking-widest">Current priority needs for the team</p>
+                    <h2 className="text-4xl font-display font-bold text-foreground tracking-tight mb-2">Active Deployments</h2>
+                    <p className="text-muted-foreground font-mono text-xs uppercase tracking-widest">Current priority needs for the team</p>
                  </div>
              </div>
 
@@ -367,11 +367,11 @@ const Join: React.FC = () => {
              </div>
 
              {/* General CTA */}
-             <div className="mt-20 mb-24 p-12 border border-dashed border-white/10 rounded-sm bg-white/[0.02] text-center relative overflow-hidden">
+             <div className="mt-20 mb-24 p-12 border border-dashed border-border rounded-sm bg-card text-center relative overflow-hidden">
                  <DitherGrid className="opacity-50" />
                  <div className="relative z-10">
-                    <h4 className="text-2xl font-display font-bold text-white mb-4 tracking-tight">Don't see your specific role?</h4>
-                    <p className="text-muted text-sm mb-8 max-w-lg mx-auto leading-relaxed font-light">
+                    <h4 className="text-2xl font-display font-bold text-foreground mb-4 tracking-tight">Don't see your specific role?</h4>
+                    <p className="text-muted-foreground text-sm mb-8 max-w-lg mx-auto leading-relaxed font-light">
                         We are always interested in conversations with high-agency builders. 
                         Whether you are a Security Specialist, Data Scientist, or just want to help—let's talk.
                     </p>

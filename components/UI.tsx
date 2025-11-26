@@ -22,9 +22,9 @@ const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_#@$";
 const BUTTON_BASE_STYLES = "inline-flex items-center justify-center h-12 px-8 text-[11px] transition-all duration-300 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed tracking-[0.2em] font-mono uppercase border group relative overflow-hidden focus-visible:ring-1 focus-visible:ring-primary rounded-sm";
 
 const BUTTON_VARIANTS: Record<ButtonVariant, string> = {
-  [ButtonVariant.PRIMARY]: "bg-white text-black border-white hover:bg-transparent hover:text-white",
-  [ButtonVariant.SECONDARY]: "bg-transparent border-white/20 text-muted hover:border-white hover:text-white",
-  [ButtonVariant.TERTIARY]: "bg-transparent border-transparent text-muted hover:text-white px-0 h-auto py-2 underline-offset-4 hover:underline",
+  [ButtonVariant.PRIMARY]: "bg-foreground text-background border-foreground hover:bg-foreground/90 hover:text-background",
+  [ButtonVariant.SECONDARY]: "bg-transparent border-border text-muted-foreground hover:border-foreground hover:text-foreground",
+  [ButtonVariant.TERTIARY]: "bg-transparent border-transparent text-muted-foreground hover:text-foreground px-0 h-auto py-2 underline-offset-4 hover:underline",
 };
 
 // --- Logo ---
@@ -163,27 +163,27 @@ interface TechPanelProps {
 export const TechPanel = ({ children, className = '', title, noBorder = false }: TechPanelProps) => {
   return (
     <div className={cn(
-      "relative bg-white/[0.02] group overflow-hidden rounded-sm",
-      !noBorder && "border border-white/10",
+      "relative bg-card group overflow-hidden rounded-sm",
+      !noBorder && "border border-border",
       className
     )}>
       {/* Subtle corner markers */}
       {!noBorder && (
-        <div className="pointer-events-none" aria-hidden="true">
-          <div className="absolute top-0 left-0 w-px h-2 bg-white/20" />
-          <div className="absolute top-0 left-0 w-2 h-px bg-white/20" />
-          <div className="absolute top-0 right-0 w-px h-2 bg-white/20" />
-          <div className="absolute top-0 right-0 w-2 h-px bg-white/20" />
-          <div className="absolute bottom-0 left-0 w-px h-2 bg-white/20" />
-          <div className="absolute bottom-0 left-0 w-2 h-px bg-white/20" />
-          <div className="absolute bottom-0 right-0 w-px h-2 bg-white/20" />
-          <div className="absolute bottom-0 right-0 w-2 h-px bg-white/20" />
+        <div className="pointer-events-none text-border" aria-hidden="true">
+          <div className="absolute top-0 left-0 w-px h-2 bg-current" />
+          <div className="absolute top-0 left-0 w-2 h-px bg-current" />
+          <div className="absolute top-0 right-0 w-px h-2 bg-current" />
+          <div className="absolute top-0 right-0 w-2 h-px bg-current" />
+          <div className="absolute bottom-0 left-0 w-px h-2 bg-current" />
+          <div className="absolute bottom-0 left-0 w-2 h-px bg-current" />
+          <div className="absolute bottom-0 right-0 w-px h-2 bg-current" />
+          <div className="absolute bottom-0 right-0 w-2 h-px bg-current" />
         </div>
       )}
       
       {title && (
-        <div className="absolute top-0 left-0 right-0 border-b border-white/5 px-6 py-3 flex justify-between items-center bg-white/[0.02]">
-            <span className="font-mono text-[10px] uppercase tracking-widest text-muted">{title}</span>
+        <div className="absolute top-0 left-0 right-0 border-b border-border px-6 py-3 flex justify-between items-center bg-card">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">{title}</span>
         </div>
       )}
 
@@ -226,7 +226,7 @@ export const SpotlightCard = ({ children, className = "" }: SpotlightCardProps) 
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             className={cn(
-              "relative overflow-hidden border border-white/10 bg-black rounded-sm",
+              "relative overflow-hidden border border-border bg-card rounded-sm",
               className
             )}
         >
@@ -234,7 +234,7 @@ export const SpotlightCard = ({ children, className = "" }: SpotlightCardProps) 
                 className="pointer-events-none absolute -inset-px transition duration-300 z-0"
                 style={{
                     opacity,
-                    background: `radial-gradient(600px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(255,255,255,0.06), transparent 40%)`,
+                    background: `radial-gradient(600px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), var(--spotlight), transparent 40%)`,
                 }}
                 aria-hidden="true"
             />
@@ -289,14 +289,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({ className = "",
   return (
     <div className="w-full space-y-2">
       {label && (
-        <label className="font-mono text-[10px] uppercase tracking-widest text-muted block ml-1">
+        <label className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground block ml-1">
           {label}
         </label>
       )}
       <input
         ref={ref}
         className={cn(
-          "flex h-12 w-full rounded-sm border border-white/10 bg-white/5 px-4 py-2 text-sm text-white placeholder:text-white/20 font-mono focus:outline-none focus:border-primary/50 focus:bg-white/10 focus:ring-1 focus:ring-primary/20 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200",
+          "flex h-12 w-full rounded-sm border border-border bg-secondary/50 px-4 py-2 text-sm text-foreground placeholder:text-muted-foreground/50 font-mono focus:outline-none focus:border-primary/50 focus:bg-secondary focus:ring-1 focus:ring-primary/20 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200",
           error && 'border-destructive focus:border-destructive',
           className
         )}
@@ -319,14 +319,14 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(({ classN
   return (
     <div className="w-full space-y-2">
       {label && (
-        <label className="font-mono text-[10px] uppercase tracking-widest text-muted block ml-1">
+        <label className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground block ml-1">
           {label}
         </label>
       )}
       <textarea
         ref={ref}
         className={cn(
-          "flex min-h-[120px] w-full rounded-sm border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/20 font-mono focus:outline-none focus:border-primary/50 focus:bg-white/10 focus:ring-1 focus:ring-primary/20 disabled:cursor-not-allowed disabled:opacity-50 resize-y transition-all duration-200",
+          "flex min-h-[120px] w-full rounded-sm border border-border bg-secondary/50 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 font-mono focus:outline-none focus:border-primary/50 focus:bg-secondary focus:ring-1 focus:ring-primary/20 disabled:cursor-not-allowed disabled:opacity-50 resize-y transition-all duration-200",
           error && 'border-destructive focus:border-destructive',
           className
         )}
@@ -350,11 +350,11 @@ interface SectionProps {
 // Consistent padding rhythm: py-24 (96px) and md:py-32 (128px)
 export const Section = ({ children, className = '', id, grid = false }: SectionProps) => {
   return (
-    <section id={id} className={cn("relative py-24 md:py-32 overflow-hidden", className)}>
+    <section id={id} className={cn("relative py-24 md:py-32 overflow-hidden bg-background", className)}>
        {grid && (
-         <div className="absolute inset-0 opacity-[0.02] pointer-events-none" 
+         <div className="absolute inset-0 pointer-events-none" 
               style={{ 
-                backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', 
+                backgroundImage: 'linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)', 
                 backgroundSize: '60px 60px' 
               }}
               aria-hidden="true"
@@ -375,9 +375,9 @@ interface GridPatternProps {
 export const GridPattern = ({ className = "" }: GridPatternProps) => {
   return (
     <div className={cn("absolute inset-0 pointer-events-none", className)} aria-hidden="true">
-      <div className="absolute inset-0 opacity-5" 
+      <div className="absolute inset-0 opacity-10" 
           style={{ 
-            backgroundImage: 'linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)', 
+            backgroundImage: 'linear-gradient(to right, var(--foreground) 1px, transparent 1px), linear-gradient(to bottom, var(--foreground) 1px, transparent 1px)', 
             backgroundSize: '100px 100px' 
           }}
       />
@@ -395,7 +395,7 @@ export const DitherGrid = ({ className = "" }: DitherGridProps) => {
     <div className={cn("absolute inset-0 z-0 overflow-hidden pointer-events-none", className)} aria-hidden="true">
       <div className="absolute inset-0 opacity-[0.05]"
            style={{
-             backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+             backgroundImage: `radial-gradient(circle at 1px 1px, var(--foreground) 1px, transparent 0)`,
              backgroundSize: '32px 32px'
            }}
       />
@@ -420,13 +420,13 @@ export const DitherGlobe = memo(({ className = "", scale = 1 }: DitherGlobeProps
     >
       
       {/* Main Globe Container with Mask */}
-      <div className="absolute inset-0 rounded-full bg-black overflow-hidden z-10 border border-white/5">
+      <div className="absolute inset-0 rounded-full bg-background overflow-hidden z-10 border border-border">
         
         {/* Layer 1: Core (Dense, Slow) */}
         <div className="absolute inset-[-50%] w-[200%] h-[200%] animate-[spin_120s_linear_infinite] opacity-50">
           <div className="absolute inset-0" 
                style={{
-                  backgroundImage: 'radial-gradient(circle at center, white 1.5px, transparent 1.5px)',
+                  backgroundImage: 'radial-gradient(circle at center, var(--globe-dot) 1.5px, transparent 1.5px)',
                   backgroundSize: '20px 20px',
                   transform: 'rotate(45deg)'
                }}
@@ -437,7 +437,7 @@ export const DitherGlobe = memo(({ className = "", scale = 1 }: DitherGlobeProps
         <div className="absolute inset-[-50%] w-[200%] h-[200%] animate-[spin-reverse_45s_linear_infinite] opacity-40 mix-blend-overlay">
            <div className="absolute inset-0" 
                style={{
-                  backgroundImage: 'radial-gradient(circle at center, #fff 2px, transparent 2px)',
+                  backgroundImage: 'radial-gradient(circle at center, var(--globe-dot) 2px, transparent 2px)',
                   backgroundSize: '40px 40px',
                }}
           />
@@ -447,7 +447,7 @@ export const DitherGlobe = memo(({ className = "", scale = 1 }: DitherGlobeProps
         <div className="absolute inset-[-50%] w-[200%] h-[200%] animate-[spin_90s_linear_infinite] opacity-30 mix-blend-screen">
             <div className="absolute inset-0"
                  style={{
-                     backgroundImage: 'radial-gradient(circle at center, #fff 1px, transparent 2px)',
+                     backgroundImage: 'radial-gradient(circle at center, var(--globe-dot) 1px, transparent 2px)',
                      backgroundSize: '24px 24px',
                      transform: 'rotate(-15deg)'
                  }}
@@ -455,22 +455,22 @@ export const DitherGlobe = memo(({ className = "", scale = 1 }: DitherGlobeProps
         </div>
 
         {/* 3D Shading Gradient */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,transparent_10%,black_90%)] z-20" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,transparent_10%,var(--background)_90%)] z-20" />
         
         {/* Scanline Effect */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-transparent h-[20%] w-full animate-scan z-30 pointer-events-none opacity-40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent h-[20%] w-full animate-scan z-30 pointer-events-none opacity-40" />
 
         {/* Rim Light */}
-        <div className="absolute inset-0 rounded-full shadow-[inset_-10px_-10px_60px_rgba(255,255,255,0.1)] z-30" />
+        <div className="absolute inset-0 rounded-full shadow-[inset_-10px_-10px_60px_var(--spotlight)] z-30" />
       </div>
       
       {/* Outer Orbital Ring (Static Tilt) */}
-      <div className="absolute inset-[-10%] rounded-full border border-dashed border-white/10 animate-[spin-slow_180s_linear_infinite] opacity-30 z-0" />
-      <div className="absolute inset-[-25%] rounded-full border border-dotted border-white/5 animate-[spin-reverse-slower_200s_linear_infinite] opacity-20 z-0" />
+      <div className="absolute inset-[-10%] rounded-full border border-dashed border-border animate-[spin-slow_180s_linear_infinite] opacity-30 z-0" />
+      <div className="absolute inset-[-25%] rounded-full border border-dotted border-border animate-[spin-reverse-slower_200s_linear_infinite] opacity-20 z-0" />
 
       {/* Dynamic Satellite 1 (Bot) */}
       <div className="absolute inset-[-20%] w-[140%] h-[140%] animate-spin-slow z-0 opacity-60">
-         <div className="absolute top-1/2 right-0 w-2 h-2 bg-white rounded-full shadow-[0_0_15px_white]" />
+         <div className="absolute top-1/2 right-0 w-2 h-2 bg-foreground rounded-full shadow-[0_0_15px_var(--foreground)]" />
       </div>
 
       {/* Dynamic Satellite 2 (Bot - Counter Orbit) */}
@@ -479,10 +479,10 @@ export const DitherGlobe = memo(({ className = "", scale = 1 }: DitherGlobeProps
       </div>
 
       {/* Crosshairs & HUD Elements */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-12 text-white/20 z-0"><Plus size={16} /></div>
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-12 text-white/20 z-0"><Plus size={16} /></div>
-      <div className="absolute left-0 top-1/2 -translate-x-12 -translate-y-1/2 text-white/20 z-0"><Plus size={16} /></div>
-      <div className="absolute right-0 top-1/2 translate-x-12 -translate-y-1/2 text-white/20 z-0"><Plus size={16} /></div>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-12 text-muted-foreground z-0"><Plus size={16} /></div>
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-12 text-muted-foreground z-0"><Plus size={16} /></div>
+      <div className="absolute left-0 top-1/2 -translate-x-12 -translate-y-1/2 text-muted-foreground z-0"><Plus size={16} /></div>
+      <div className="absolute right-0 top-1/2 translate-x-12 -translate-y-1/2 text-muted-foreground z-0"><Plus size={16} /></div>
     </div>
   );
 });

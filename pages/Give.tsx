@@ -38,22 +38,22 @@ const FAQ_ITEMS: readonly FaqItem[] = [
 // --- Sub-Components ---
 
 const PitchItem: React.FC<{ item: PitchPoint; index: number }> = ({ item, index }) => (
-    <div className="group border-l border-white/10 pl-6 hover:border-white/30 transition-colors duration-300">
-        <h3 className="text-white font-display font-bold text-xl mb-3 tracking-tight group-hover:text-primary transition-colors">
+    <div className="group border-l border-border pl-6 hover:border-foreground/30 transition-colors duration-300">
+        <h3 className="text-foreground font-display font-bold text-xl mb-3 tracking-tight group-hover:text-primary transition-colors">
             {item.title}
         </h3>
-        <p className="text-sm text-gray-500 leading-relaxed text-balance font-light">
+        <p className="text-sm text-muted-foreground leading-relaxed text-balance font-light">
             {item.desc}
         </p>
     </div>
 );
 
 const FaqItemPanel: React.FC<{ item: FaqItem }> = ({ item }) => (
-    <TechPanel className="h-full bg-black hover:border-white/30 transition-colors group">
-        <h4 className="text-white font-bold font-display text-lg mb-4 group-hover:text-primary transition-colors tracking-tight">
+    <TechPanel className="h-full bg-card hover:border-foreground/30 transition-colors group">
+        <h4 className="text-foreground font-bold font-display text-lg mb-4 group-hover:text-primary transition-colors tracking-tight">
             {item.q}
         </h4>
-        <p className="text-sm text-gray-400 leading-relaxed text-balance font-light">
+        <p className="text-sm text-muted-foreground leading-relaxed text-balance font-light">
             {item.a}
         </p>
     </TechPanel>
@@ -77,35 +77,35 @@ const DonationCard: React.FC = () => {
     };
 
     return (
-        <SpotlightCard className="bg-white/[0.02] border-white/10 group rounded-sm">
-            <div className="bg-black p-8 md:p-10 flex flex-col gap-8 relative overflow-hidden rounded-sm h-full">
+        <SpotlightCard className="bg-card border-border group rounded-sm">
+            <div className="bg-background p-8 md:p-10 flex flex-col gap-8 relative overflow-hidden rounded-sm h-full">
                 
                 {/* Header */}
-                <div className="flex justify-between items-start border-b border-white/10 pb-6">
+                <div className="flex justify-between items-start border-b border-border pb-6">
                     <div>
-                        <div className="flex items-center gap-2 text-white mb-1">
+                        <div className="flex items-center gap-2 text-foreground mb-1">
                             <HeartHandshake size={18} className="text-success" />
                             <span className="font-display font-bold text-lg tracking-tight">Secure Donation</span>
                         </div>
-                        <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">
+                        <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
                             Power the infrastructure
                         </span>
                     </div>
-                    <div className="flex items-center gap-1.5 px-2 py-1 bg-white/5 rounded-sm border border-white/5 text-[10px] font-mono text-success uppercase tracking-widest">
+                    <div className="flex items-center gap-1.5 px-2 py-1 bg-secondary rounded-sm border border-border text-[10px] font-mono text-success uppercase tracking-widest">
                         <Lock size={10} />
                         Encrypted
                     </div>
                 </div>
 
                 {/* Frequency Segmented Control */}
-                <div className="flex p-1 bg-white/5 rounded-sm border border-white/10">
+                <div className="flex p-1 bg-secondary rounded-sm border border-border">
                     <button 
                         type="button"
                         onClick={() => setFrequency('monthly')}
                         className={`flex-1 py-2.5 text-[10px] font-mono uppercase tracking-widest rounded-sm transition-all duration-300 ${
                             frequency === 'monthly' 
-                            ? 'bg-white text-black font-bold shadow-sm' 
-                            : 'text-gray-500 hover:text-white'
+                            ? 'bg-foreground text-background font-bold shadow-sm' 
+                            : 'text-muted-foreground hover:text-foreground'
                         }`}
                     >
                         Monthly
@@ -115,8 +115,8 @@ const DonationCard: React.FC = () => {
                         onClick={() => setFrequency('onetime')}
                         className={`flex-1 py-2.5 text-[10px] font-mono uppercase tracking-widest rounded-sm transition-all duration-300 ${
                             frequency === 'onetime' 
-                            ? 'bg-white text-black font-bold shadow-sm' 
-                            : 'text-gray-500 hover:text-white'
+                            ? 'bg-foreground text-background font-bold shadow-sm' 
+                            : 'text-muted-foreground hover:text-foreground'
                         }`}
                     >
                         One-Time
@@ -133,13 +133,13 @@ const DonationCard: React.FC = () => {
                             className={`
                                 relative h-14 font-mono text-sm border rounded-sm transition-all duration-200 overflow-hidden group/btn
                                 ${amount === val && !customAmount
-                                    ? 'bg-white border-white text-black font-bold' 
-                                    : 'bg-black border-white/10 text-gray-400 hover:border-white/30 hover:text-white'}
+                                    ? 'bg-foreground border-foreground text-background font-bold' 
+                                    : 'bg-background border-border text-muted-foreground hover:border-foreground/30 hover:text-foreground'}
                             `}
                         >
                             ${val}
                             {amount === val && !customAmount && (
-                                <div className="absolute top-1 right-1 text-black">
+                                <div className="absolute top-1 right-1 text-background">
                                     <Check size={10} />
                                 </div>
                             )}
@@ -150,12 +150,12 @@ const DonationCard: React.FC = () => {
                     <div className={`
                         relative col-span-1 h-14 border rounded-sm transition-all duration-200
                         ${customAmount 
-                            ? 'border-white bg-white/5' 
-                            : 'border-white/10 bg-black hover:border-white/30'}
+                            ? 'border-foreground bg-secondary' 
+                            : 'border-border bg-background hover:border-foreground/30'}
                     `}>
                         <span className={`
                             absolute left-3 top-1/2 -translate-y-1/2 text-sm font-mono transition-colors
-                            ${customAmount ? 'text-white' : 'text-gray-500'}
+                            ${customAmount ? 'text-foreground' : 'text-muted-foreground'}
                         `}>$</span>
                         <input 
                             type="number" 
@@ -164,8 +164,8 @@ const DonationCard: React.FC = () => {
                             value={customAmount}
                             onChange={handleCustomChange}
                             className={`
-                                w-full h-full bg-transparent text-white font-mono text-sm pl-7 pr-2 
-                                focus:outline-none placeholder:text-gray-600 transition-colors
+                                w-full h-full bg-transparent text-foreground font-mono text-sm pl-7 pr-2 
+                                focus:outline-none placeholder:text-muted-foreground/50 transition-colors
                                 ${customAmount ? 'font-bold' : 'font-normal'}
                             `}
                         />
@@ -173,28 +173,28 @@ const DonationCard: React.FC = () => {
                 </div>
 
                 {/* Total Display */}
-                <div className="py-6 px-6 text-center border border-white/10 bg-white/[0.02] rounded-sm">
-                    <span className="block text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-2">
+                <div className="py-6 px-6 text-center border border-border bg-secondary/30 rounded-sm">
+                    <span className="block text-[10px] font-mono text-muted-foreground uppercase tracking-widest mb-2">
                         Total Contribution
                     </span>
                     <div className="flex items-baseline justify-center gap-1">
-                        <span className="text-4xl md:text-5xl font-display font-bold text-white tracking-tighter">
+                        <span className="text-4xl md:text-5xl font-display font-bold text-foreground tracking-tighter">
                             ${amount}
                         </span>
-                        <span className="text-sm text-gray-500 font-mono uppercase tracking-wider">
+                        <span className="text-sm text-muted-foreground font-mono uppercase tracking-wider">
                            USD
                         </span>
                     </div>
-                    <span className="text-xs text-gray-500 block mt-2 font-light">
+                    <span className="text-xs text-muted-foreground block mt-2 font-light">
                         {frequency === 'monthly' ? 'Billed monthly' : 'Single transaction'}
                     </span>
                 </div>
 
-                <Button className="w-full h-14 bg-white hover:bg-primary hover:text-white border-none text-black font-bold tracking-wide" icon={<ArrowRight size={16} />}>
+                <Button className="w-full h-14 font-bold tracking-wide" icon={<ArrowRight size={16} />}>
                     Process Donation
                 </Button>
 
-                <div className="flex items-center justify-center gap-2 text-[10px] font-mono text-gray-600 uppercase tracking-widest pt-2">
+                <div className="flex items-center justify-center gap-2 text-[10px] font-mono text-muted-foreground uppercase tracking-widest pt-2">
                     <ShieldCheck size={12} className="text-success" />
                     <span>256-bit SSL Encrypted</span>
                 </div>
@@ -207,7 +207,7 @@ const DonationCard: React.FC = () => {
 
 const Give: React.FC = () => {
   return (
-    <div className="pt-24 min-h-screen bg-black text-white selection:bg-white selection:text-black font-sans overflow-x-hidden">
+    <div className="pt-24 min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background font-sans overflow-x-hidden">
       <DitherGrid className="opacity-10 fixed inset-0 z-0" />
 
       {/* Background Globe */}
@@ -215,24 +215,24 @@ const Give: React.FC = () => {
           <DitherGlobe scale={1.8} />
       </div>
 
-      <Section className="relative z-10 border-b border-white/5">
+      <Section className="relative z-10 border-b border-border">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
             
             {/* Left Column: The Pitch */}
             <div className="lg:col-span-7 pt-8">
                 <Reveal>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 border border-white/10 bg-white/5 rounded-full text-[10px] font-mono uppercase tracking-widest text-muted mb-8 backdrop-blur-md">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 border border-border bg-secondary/50 rounded-full text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-8 backdrop-blur-md">
                         <span className="w-1.5 h-1.5 bg-success rounded-full animate-pulse"></span>
                         <ScrambleText text="NONPROFIT 501(c)(3)" delay={200} />
                     </div>
 
-                    <h1 className="text-6xl md:text-8xl font-display font-bold text-white mb-8 leading-[0.9] tracking-tighter text-balance">
+                    <h1 className="text-6xl md:text-8xl font-display font-bold text-foreground mb-8 leading-[0.9] tracking-tighter text-balance">
                         Fuel the tool that<br/>
                         serves the servants.
                     </h1>
                     
-                    <div className="border-l-2 border-white/10 pl-8 mb-16">
-                        <p className="text-xl text-gray-300 font-light leading-relaxed max-w-xl text-balance">
+                    <div className="border-l-2 border-border pl-8 mb-16">
+                        <p className="text-xl text-muted-foreground font-light leading-relaxed max-w-xl text-balance">
                             Your capital builds the digital rails for the next generation of missions. 
                             We operate with zero profit margin to maximize mission velocity.
                         </p>
@@ -258,11 +258,11 @@ const Give: React.FC = () => {
       </Section>
 
       {/* FAQ / Technical Details */}
-      <Section className="bg-white/[0.02]">
+      <Section className="bg-card">
         <Reveal>
             <div className="flex items-center gap-2 mb-12">
-                <HelpCircle size={16} className="text-white/40" />
-                <h2 className="font-mono text-xs text-white uppercase tracking-widest">Financial FAQ</h2>
+                <HelpCircle size={16} className="text-muted-foreground/60" />
+                <h2 className="font-mono text-xs text-foreground uppercase tracking-widest">Financial FAQ</h2>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth bg-black antialiased">
+<html lang="en" class="scroll-smooth antialiased">
   <head>
     <!-- Core Meta -->
     <meta charset="UTF-8" />
@@ -20,45 +20,42 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
+        darkMode: 'class',
         theme: {
           extend: {
             colors: {
-              // Brand Palette
-              black: '#020202',
-              offblack: '#0A0A0A',
-              panel: '#111111',
-              border: '#222222',
-              white: '#F2F2F2',
+              // Semantic System
+              background: "var(--background)",
+              foreground: "var(--foreground)",
+              
+              card: "var(--card)",
+              "card-foreground": "var(--card-foreground)",
+              
+              popover: "var(--popover)",
+              "popover-foreground": "var(--popover-foreground)",
+              
+              primary: "var(--primary)",
+              "primary-foreground": "var(--primary-foreground)",
+              
+              secondary: "var(--secondary)",
+              "secondary-foreground": "var(--secondary-foreground)",
+              
+              muted: "var(--muted)",
+              "muted-foreground": "var(--muted-foreground)",
+              
+              accent: "var(--accent)",
+              "accent-foreground": "var(--accent-foreground)",
+              
+              destructive: "var(--destructive)",
+              "destructive-foreground": "var(--destructive-foreground)",
+              
+              border: "var(--border)",
+              input: "var(--input)",
+              ring: "var(--ring)",
+              
+              // Legacy/Brand Support
+              success: '#10b981',
               coral: '#d5a790',
-              success: '#10b981', // Emerald-500
-              
-              // Semantic Mapping (Shadcn + Brand Dark Mode)
-              background: "#020202",
-              foreground: "#F2F2F2",
-              
-              primary: "#10b981", // Emerald-500
-              "primary-foreground": "#020202",
-              
-              secondary: "#111111",
-              "secondary-foreground": "#F2F2F2",
-              
-              muted: "#888888",
-              "muted-foreground": "#555555",
-              
-              accent: "#111111",
-              "accent-foreground": "#F2F2F2",
-              
-              destructive: "#ef4444",
-              "destructive-foreground": "#F2F2F2",
-              
-              card: "#020202",
-              "card-foreground": "#F2F2F2",
-              
-              popover: "#020202",
-              "popover-foreground": "#F2F2F2",
-              
-              input: "#222222",
-              ring: "#10b981",
             },
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
@@ -114,16 +111,75 @@
     <!-- Global Styles & Utilities -->
     <style>
       :root {
+        /* Light Mode */
+        --background: #fcfcfc;
+        --foreground: #09090b;
+        --card: #ffffff;
+        --card-foreground: #09090b;
+        --popover: #ffffff;
+        --popover-foreground: #09090b;
+        --primary: #10b981;
+        --primary-foreground: #ffffff;
+        --secondary: #f4f4f5;
+        --secondary-foreground: #18181b;
+        --muted: #f4f4f5;
+        --muted-foreground: #71717a;
+        --accent: #f4f4f5;
+        --accent-foreground: #18181b;
+        --destructive: #ef4444;
+        --destructive-foreground: #fafafa;
+        --border: #e4e4e7;
+        --input: #e4e4e7;
+        --ring: #18181b;
+        
+        /* Custom UI Variables */
+        --spotlight: rgba(0,0,0,0.05);
+        --grid-line: rgba(0,0,0,0.05);
+        --globe-dot: #09090b;
+        
+        color-scheme: light;
+      }
+      
+      .dark {
+        /* Dark Mode */
+        --background: #020202;
+        --foreground: #F2F2F2;
+        --card: #0A0A0A;
+        --card-foreground: #F2F2F2;
+        --popover: #020202;
+        --popover-foreground: #F2F2F2;
+        --primary: #10b981;
+        --primary-foreground: #020202;
+        --secondary: #111111;
+        --secondary-foreground: #F2F2F2;
+        --muted: #1a1a1a;
+        --muted-foreground: #888888;
+        --accent: #111111;
+        --accent-foreground: #F2F2F2;
+        --destructive: #ef4444;
+        --destructive-foreground: #F2F2F2;
+        --border: #222222;
+        --input: #222222;
+        --ring: #10b981;
+        
+        /* Custom UI Variables */
+        --spotlight: rgba(255,255,255,0.06);
+        --grid-line: rgba(255,255,255,0.05);
+        --globe-dot: #ffffff;
+        
         color-scheme: dark;
       }
+
       body {
-        background-color: #020202;
-        color: #F2F2F2;
+        background-color: var(--background);
+        color: var(--foreground);
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         overflow-x: hidden;
+        transition: background-color 0.3s ease, color 0.3s ease;
       }
-      /* Noise Texture Overlay */
+      
+      /* Noise Texture Overlay - Adaptive */
       .bg-noise {
         position: fixed;
         top: 0;
@@ -135,20 +191,21 @@
         opacity: 0.04;
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
       }
+      
       /* Custom Scrollbar */
       ::-webkit-scrollbar {
         width: 8px;
       }
       ::-webkit-scrollbar-track {
-        background: #020202;
+        background: var(--background);
       }
       ::-webkit-scrollbar-thumb {
-        background: #333;
+        background: var(--muted);
         border-radius: 4px;
-        border: 2px solid #020202;
+        border: 2px solid var(--background);
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #555;
+        background: var(--muted-foreground);
       }
     </style>
 

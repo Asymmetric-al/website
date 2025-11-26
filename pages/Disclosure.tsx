@@ -1,16 +1,9 @@
-
 import React, { memo } from 'react';
 import { Container, DitherGrid, ScrambleText, Reveal, TechPanel, SpotlightCard, DitherGlobe, Section } from '../components/UI';
-import { ShieldCheck, Scale, FileText, Landmark, Building2, CheckCircle2, FileKey, ArrowRight, LucideIcon, Mail } from 'lucide-react';
+import { ShieldCheck, Scale, FileText, Landmark, Building2, Check, FileKey, ArrowRight, LucideIcon, Mail } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 // --- Types ---
-
-interface EntityDetailProps {
-  label: string;
-  value: React.ReactNode;
-  mono?: boolean;
-}
 
 interface ClauseSectionProps {
   title: string;
@@ -23,98 +16,69 @@ interface ClauseSectionProps {
 
 // --- Sub-Components ---
 
-const EntityDetailRow = memo(({ label, value, mono = false }: EntityDetailProps) => (
-  <div className="flex justify-between items-center py-2.5 border-b border-white/5 last:border-0 group">
-    <span className="text-[10px] font-mono text-muted uppercase tracking-widest group-hover:text-gray-400 transition-colors">
-      {label}
-    </span>
-    <span className={cn(
-      "text-sm text-white text-right",
-      mono ? "font-mono" : "font-sans font-light"
-    )}>
-      {value}
-    </span>
-  </div>
-));
-
-EntityDetailRow.displayName = 'EntityDetailRow';
-
 const EntityStatusCard = memo(() => (
-  <SpotlightCard className="bg-white/[0.02] border-white/10 p-px rounded-sm w-full">
-    <div className="bg-black p-5 rounded-sm">
-      {/* Header */}
-      <div className="flex items-center gap-4 mb-5 pb-5 border-b border-white/10">
-        <div className="p-2 bg-white/5 border border-white/10 rounded-sm text-white flex-shrink-0">
-          <Landmark size={18} strokeWidth={1.5} />
+  <div className="w-full bg-background border border-border rounded-sm overflow-hidden shadow-sm">
+    {/* Header & Primary ID */}
+    <div className="p-4 border-b border-border bg-secondary/10">
+      <div className="flex justify-between items-start mb-2">
+        <div className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
+          <Landmark size={12} />
+          Legal Entity
         </div>
-        <div>
-          <div className="text-[10px] font-mono text-muted uppercase tracking-widest mb-1">Legal Entity</div>
-          <div className="font-bold font-display text-lg tracking-tight leading-none text-white">Global Fellowship Inc.</div>
-        </div>
-      </div>
-      
-      {/* Details List */}
-      <div className="flex flex-col">
-        <EntityDetailRow 
-          label="Tax Status" 
-          value={
-            <span className="flex items-center justify-end gap-1.5 text-success">
-              <CheckCircle2 size={12} /> 501(c)(3) ACTIVE
-            </span>
-          } 
-          mono 
-        />
-        <EntityDetailRow 
-          label="IRS EIN" 
-          value={<span className="bg-white/10 px-2 py-0.5 rounded-sm text-[11px] tracking-wider">68-0214543</span>} 
-          mono 
-        />
-        <EntityDetailRow 
-          label="Incorporation" 
-          value="CALIFORNIA, USA" 
-          mono 
-        />
-        <EntityDetailRow 
-          label="Fiscal Year" 
-          value="JAN 01 - DEC 31" 
-          mono 
-        />
-      </div>
-
-      {/* Relationship Footer */}
-      <div className="mt-5 pt-5 border-t border-dashed border-white/10">
-        <div className="text-[9px] font-mono text-muted uppercase tracking-widest mb-3">Project Relationship</div>
-        <div className="flex items-center justify-between text-xs text-white border border-white/10 p-2.5 bg-white/[0.02] rounded-sm group hover:border-white/20 transition-colors">
-          <div className="flex items-center gap-2">
-            <Building2 size={14} className="text-gray-500" />
-            <span className="font-mono text-[9px] tracking-wider text-gray-400 uppercase">Parent</span>
-          </div>
-          <ArrowRight size={12} className="text-gray-600 group-hover:text-primary transition-colors" />
-          <div className="flex items-center gap-2">
-             <span className="font-bold tracking-tight text-xs">Asymmetric.al</span>
-             <span className="font-mono text-[9px] tracking-wider text-gray-400 uppercase">Project</span>
-          </div>
+        <div className="flex items-center gap-1.5 px-1.5 py-0.5 bg-success/10 text-success rounded-sm border border-success/20">
+           <Check size={10} strokeWidth={3} />
+           <span className="text-[9px] font-mono font-bold uppercase tracking-wide">Active</span>
         </div>
       </div>
+      <div className="font-display font-bold text-lg text-foreground leading-tight">Global Fellowship Inc.</div>
+      <div className="mt-1 text-xs text-muted-foreground font-light">501(c)(3) Nonprofit Corp.</div>
     </div>
-  </SpotlightCard>
+
+    {/* Technical Specs Grid */}
+    <div className="grid grid-cols-2 divide-x divide-border border-b border-border">
+        <div className="p-3">
+            <div className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground/70 mb-1">IRS EIN</div>
+            <div className="text-xs font-mono text-foreground">68-0214543</div>
+        </div>
+        <div className="p-3">
+             <div className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground/70 mb-1">Domicile</div>
+             <div className="text-xs font-mono text-foreground">California, USA</div>
+        </div>
+    </div>
+    
+    <div className="grid grid-cols-2 divide-x divide-border border-b border-border">
+        <div className="p-3">
+            <div className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground/70 mb-1">Fiscal Year</div>
+            <div className="text-xs font-mono text-foreground">Jan 01 - Dec 31</div>
+        </div>
+        <div className="p-3">
+             <div className="text-[9px] font-mono uppercase tracking-widest text-muted-foreground/70 mb-1">Relationship</div>
+             <div className="text-xs font-mono text-foreground">Parent Org</div>
+        </div>
+    </div>
+
+    {/* Footer Context */}
+    <div className="px-3 py-2 bg-secondary/30 text-[9px] text-muted-foreground font-mono leading-relaxed text-center">
+        Asymmetric.al is a fiscal project of Global Fellowship Inc.
+    </div>
+  </div>
 ));
 
 EntityStatusCard.displayName = 'EntityStatusCard';
 
 const FinancialContactCard = memo(() => (
-  <div className="bg-black border border-white/10 p-5 rounded-sm w-full hover:border-white/20 transition-colors">
-     <div className="flex items-center gap-2 mb-4 text-white/40">
+  <div className="bg-card border border-border p-4 rounded-sm w-full hover:border-foreground/20 transition-colors">
+     <div className="flex items-center gap-2 mb-3 text-muted-foreground">
         <Mail size={14} />
         <span className="text-[10px] font-mono uppercase tracking-widest">Financial Contact</span>
      </div>
      
-     <p className="text-xs text-gray-400 mb-6 leading-relaxed font-light">
-        For official audits, 990 requests, or specific giving inquiries.
+     <p className="text-xs text-muted-foreground mb-4 leading-relaxed font-light">
+        For official audits, 990 requests, or giving inquiries.
      </p>
      
-     <div className="pt-4 border-t border-white/5">
-        <a href="mailto:finance@globalfellowship.org" className="text-white hover:text-primary transition-colors font-mono text-[10px] uppercase tracking-wider flex items-center gap-2 group/link w-fit">
+     <div className="pt-3 border-t border-border">
+        <a href="mailto:finance@globalfellowship.org" className="text-foreground hover:text-primary transition-colors font-mono text-[10px] uppercase tracking-wider flex items-center gap-2 group/link w-fit">
             finance@globalfellowship.org <ArrowRight size={10} className="group-hover/link:translate-x-0.5 transition-transform" />
         </a>
      </div>
@@ -133,7 +97,7 @@ const ClauseSection = memo(({ title, id, icon: Icon, delay, theme, children }: C
   return (
     <div id={id} className="scroll-mt-32">
         <Reveal delay={delay}>
-        <TechPanel title={title} className="bg-black/50 hover:bg-black transition-colors duration-500 group border border-white/10">
+        <TechPanel title={title} className="bg-card hover:bg-secondary/20 transition-colors duration-500 group border border-border">
             <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
             <div className={cn("p-4 rounded-sm border hidden md:flex items-center justify-center shrink-0 transition-colors duration-300", themeStyles[theme])}>
                 <Icon size={24} strokeWidth={1.5} />
@@ -154,153 +118,108 @@ ClauseSection.displayName = 'ClauseSection';
 
 const Disclosure: React.FC = () => {
   return (
-    <div className="pt-24 min-h-screen bg-black text-white font-sans selection:bg-white selection:text-black overflow-x-hidden">
+    <div className="pt-24 min-h-screen bg-background text-foreground font-sans selection:bg-foreground selection:text-background overflow-x-hidden">
       <DitherGrid className="opacity-10 fixed inset-0 z-0" />
       
       {/* Background Ambience */}
-      <div className="fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 opacity-10 pointer-events-none z-0 mix-blend-screen">
+      <div className="fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 opacity-20 pointer-events-none z-0 mix-blend-screen">
           <DitherGlobe scale={1.8} />
       </div>
 
-      {/* Added !overflow-visible to ensure sticky positioning works correctly within the Section */}
-      <Section className="relative z-10 !pb-24 !overflow-visible">
-        
-        {/* Header Section */}
-        <Container className="mb-20 md:mb-24 border-b border-white/5 pb-12">
-            <div className="flex flex-col md:flex-row justify-between items-end gap-8">
-                <div className="max-w-3xl">
-                    <Reveal>
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 bg-white/5 rounded-full text-[10px] font-mono uppercase tracking-widest text-muted mb-8 backdrop-blur-md">
-                            <ShieldCheck size={12} className="text-success" />
-                            <span className="w-1.5 h-1.5 bg-success rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
-                            <ScrambleText text="COMPLIANCE RECORD // PUBLIC" delay={200} />
-                        </div>
-                        <h1 className="text-6xl md:text-8xl font-display font-bold tracking-tighter leading-[0.9] text-white mb-8">
-                            Disclosure<span className="text-white/20">.Docx</span>
-                        </h1>
-                    </Reveal>
-                    
-                    <Reveal delay={100}>
-                        <p className="text-xl text-gray-400 font-light leading-relaxed text-balance border-l border-white/20 pl-6">
-                            Transparency regarding our governance structure, fiscal control, and accountability. We operate in the light to serve the Kingdom.
-                        </p>
-                    </Reveal>
-                </div>
-
-                <Reveal delay={200} className="w-full md:w-auto">
-                     <div className="flex flex-col md:items-end border-l-2 md:border-l-0 md:border-r-2 border-white/10 pl-6 md:pl-0 md:pr-6 py-2">
-                        <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest mb-1">Document ID</div>
-                        <div className="font-mono text-white text-sm tracking-wider">GF_INC_501C3_V1</div>
-                     </div>
-                </Reveal>
-            </div>
-        </Container>
-
+      <Section className="relative z-10 !pb-24">
         <Container>
-            {/* Removed items-start to allow columns to stretch, enabling sticky behavior */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-                
-                {/* Left Column: Entity Status - Sticky */}
-                <div className="lg:col-span-4 order-2 lg:order-1 relative">
-                    <div className="lg:sticky lg:top-32 space-y-4">
-                        <Reveal delay={300}>
-                            <EntityStatusCard />
-                        </Reveal>
-                        <Reveal delay={400}>
-                            <FinancialContactCard />
-                        </Reveal>
-                    </div>
-                </div>
+           {/* Header */}
+           <div className="mb-20 pb-12 border-b border-border">
+              <Reveal>
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-border bg-secondary/50 rounded-full text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-8 backdrop-blur-md">
+                      <Scale size={12} className="text-primary" />
+                      <ScrambleText text="PUBLIC DISCLOSURE" delay={200} />
+                  </div>
+                  <h1 className="text-6xl md:text-8xl font-display font-bold text-foreground mb-8 tracking-tighter leading-[0.9]">
+                      Transparency<br/>Report.
+                  </h1>
+              </Reveal>
+               <Reveal delay={100}>
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
+                       <p className="text-xl text-muted-foreground font-light leading-relaxed text-balance border-l border-border pl-6">
+                           We operate in the light. As a nonprofit project, we believe our partners deserve to know exactly how we are structured and governed.
+                       </p>
+                       <div className="flex justify-start md:justify-end">
+                           <div className="flex items-center gap-3 text-xs font-mono text-muted-foreground uppercase tracking-widest bg-secondary/30 border border-border px-4 py-2 rounded-sm">
+                               <FileText size={14} />
+                               <span>Last Audit: Q4 2024</span>
+                           </div>
+                       </div>
+                   </div>
+               </Reveal>
+           </div>
 
-                {/* Right Column: Detailed Clauses */}
-                <div className="lg:col-span-8 order-1 lg:order-2 space-y-6">
-                    
-                    {/* Clause 1: Variance Power */}
-                    <ClauseSection 
-                        id="fiscal-control"
-                        title="CLAUSE 01 // FISCAL CONTROL" 
-                        icon={Scale} 
-                        theme="red" 
-                        delay={400}
-                    >
-                        <h3 className="text-2xl font-display font-bold text-white tracking-tight">Discretion & Control of Funds</h3>
-                        <p className="text-gray-400 leading-relaxed font-light text-balance text-lg">
-                            To ensure compliance with IRS regulations regarding tax-deductible contributions, all donations solicited for the Asymmetric.al project are received by Global Fellowship Inc.
+           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
+               {/* Sidebar */}
+               <div className="hidden lg:block lg:col-span-4 relative">
+                   <div className="sticky top-32 space-y-8">
+                       <EntityStatusCard />
+                       <FinancialContactCard />
+                   </div>
+               </div>
+
+               {/* Content */}
+               <div className="lg:col-span-8 space-y-12">
+                   
+                   <ClauseSection 
+                      id="structure" 
+                      title="Legal Structure & Governance" 
+                      icon={Building2} 
+                      delay={200}
+                      theme="blue"
+                   >
+                       <p className="text-lg text-foreground font-display font-bold mb-2">Fiscal Sponsorship Model</p>
+                       <p className="text-muted-foreground leading-relaxed font-light">
+                           Asymmetric.al is not a standalone corporation. We are a legally registered project of Global Fellowship Inc., a 501(c)(3) nonprofit organization based in California.
+                       </p>
+                       <p className="text-muted-foreground leading-relaxed font-light">
+                           This structure allows us to operate with the agility of a startup while maintaining the accountability, tax-exempt status, and governance of an established missions agency. All donations are tax-deductible to the full extent of the law.
+                       </p>
+                   </ClauseSection>
+
+                   <ClauseSection 
+                      id="finance" 
+                      title="Financial Accountability" 
+                      icon={ShieldCheck} 
+                      delay={300}
+                      theme="emerald"
+                   >
+                        <p className="text-lg text-foreground font-display font-bold mb-2">Strict Fund Separation</p>
+                        <p className="text-muted-foreground leading-relaxed font-light">
+                            All funds raised for Asymmetric.al are restricted for this project's use. Global Fellowship Inc. provides accounting oversight, ensuring every dollar is spent according to our charter.
                         </p>
-                        <div className="bg-red-500/[0.03] border-l-2 border-red-500/30 pl-6 py-6 my-6 rounded-r-sm">
-                            <p className="text-sm italic text-red-100/80 font-serif leading-relaxed">
-                                "Contributions are solicited with the understanding that Global Fellowship Inc. has complete discretion and control over the use of all donated funds."
-                            </p>
-                        </div>
-                        <div className="text-gray-500 text-sm leading-relaxed border-t border-white/5 pt-6 mt-6">
-                            <strong className="text-gray-300 block mb-2 font-mono text-[10px] uppercase tracking-widest">The "Variance Power" Requirement</strong>
-                            While Global Fellowship Inc. intends to use all designated gifts for the Asymmetric.al project, the Board of Directors retains the legal right and fiduciary responsibility to redirect funds if the project's purpose becomes impossible to fulfill, or if such redirection is necessary to ensure the funds are used in a manner consistent with the exempt purposes of the organization.
-                        </div>
-                    </ClauseSection>
+                        <ul className="space-y-2 mt-4 text-sm text-muted-foreground font-mono">
+                            <li className="flex gap-3 items-center"><Check size={14} className="text-success" /> Independent Board Oversight</li>
+                            <li className="flex gap-3 items-center"><Check size={14} className="text-success" /> Annual External CPA Review</li>
+                            <li className="flex gap-3 items-center"><Check size={14} className="text-success" /> Public Form 990 Availability</li>
+                        </ul>
+                   </ClauseSection>
 
-                    {/* Clause 2: Religious Entity */}
-                    <ClauseSection 
-                        id="classification"
-                        title="CLAUSE 02 // CLASSIFICATION" 
-                        icon={FileKey} 
-                        theme="blue" 
-                        delay={500}
-                    >
-                        <h3 className="text-2xl font-display font-bold text-white tracking-tight">Religious Nonprofit Status</h3>
-                        <p className="text-gray-400 leading-relaxed font-light text-balance text-lg mb-8">
-                            Global Fellowship Inc. is organized as a religious nonprofit corporation. As such, we operate in accordance with our sincerely held religious beliefs and tenets of faith.
+                   <ClauseSection 
+                      id="data" 
+                      title="Data Ownership" 
+                      icon={FileKey} 
+                      delay={400}
+                      theme="red"
+                   >
+                        <p className="text-lg text-foreground font-display font-bold mb-2">Tenant Sovereignty</p>
+                        <p className="text-muted-foreground leading-relaxed font-light">
+                            We distinguish clearly between "Platform Data" (analytics, logs) and "Tenant Data" (your donors, your missionaries). You own your Tenant Data. We do not sell, rent, or trade it.
                         </p>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="p-5 border border-white/5 bg-black rounded-sm hover:border-blue-500/20 transition-colors">
-                                <h4 className="text-[9px] font-mono text-blue-400 uppercase tracking-widest mb-3">Title VII Exemption</h4>
-                                <p className="text-xs text-gray-400 leading-relaxed font-light">
-                                    We reserve the right to hire employees who share our religious beliefs pursuant to the exemption for religious organizations under the Civil Rights Act of 1964 (42 U.S.C. § 2000e-1).
-                                </p>
-                            </div>
-                            <div className="p-5 border border-white/5 bg-black rounded-sm hover:border-blue-500/20 transition-colors">
-                                <h4 className="text-[9px] font-mono text-blue-400 uppercase tracking-widest mb-3">Mission Purpose</h4>
-                                <p className="text-xs text-gray-400 leading-relaxed font-light">
-                                    The overarching mission of the Asymmetric.al project is the advancement of the Christian religion through the development of technology that aids missionary endeavors.
-                                </p>
-                            </div>
-                        </div>
-                    </ClauseSection>
-
-                    {/* Clause 3: Deductibility */}
-                    <ClauseSection 
-                        id="deductibility"
-                        title="CLAUSE 03 // DEDUCTIBILITY" 
-                        icon={FileText} 
-                        theme="emerald" 
-                        delay={600}
-                    >
-                        <h3 className="text-2xl font-display font-bold text-white tracking-tight">Tax Deductibility & Receipts</h3>
-                        <p className="text-gray-400 leading-relaxed font-light text-balance text-lg mb-6">
-                            Contributions to Global Fellowship Inc. are tax-deductible to the fullest extent permitted by law. Donors will receive an official tax receipt for all contributions immediately via email for online gifts, or via mail for checks.
+                        <p className="text-muted-foreground leading-relaxed font-light">
+                            If you choose to leave the platform, we provide full database exports in standard formats (CSV/JSON/SQL). We do not lock you in.
                         </p>
-                        <div className="text-[11px] text-gray-500 font-mono bg-emerald-500/[0.02] p-4 rounded-sm border border-emerald-500/10 flex items-start gap-3">
-                            <ShieldCheck size={14} className="text-emerald-500 mt-0.5 shrink-0" />
-                            <span>
-                                <strong className="text-emerald-400">DISCLAIMER:</strong> No goods or services were provided in exchange for your contribution unless otherwise explicitly noted on your receipt. The intangible religious benefits provided are not valued for tax purposes.
-                            </span>
-                        </div>
-                    </ClauseSection>
+                   </ClauseSection>
 
-                </div>
-            </div>
+               </div>
+           </div>
+
         </Container>
-
-        {/* Footer Seal */}
-        <Container>
-            <div className="mt-24 pt-12 border-t border-white/10 flex flex-col items-center justify-center opacity-40 hover:opacity-100 transition-opacity duration-700">
-                <div className="w-20 h-20 border border-white/20 rounded-full flex items-center justify-center mb-6 relative bg-white/[0.01]">
-                    <div className="absolute inset-1 border border-dashed border-white/10 rounded-full animate-[spin_60s_linear_infinite]" />
-                    <Landmark size={24} className="text-white" strokeWidth={1} />
-                </div>
-                <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-white">Official Governance Record</div>
-            </div>
-        </Container>
-
       </Section>
     </div>
   );

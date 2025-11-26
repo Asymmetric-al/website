@@ -1,3 +1,4 @@
+
 import React, { memo, useEffect, useState } from 'react';
 import { Container, DitherGrid, Reveal, ScrambleText, Section, TechPanel, SpotlightCard } from '../components/UI';
 import { ShieldCheck, Lock, ArrowRight, ChevronRight, FileText, CheckCircle2, Server, Globe, CreditCard, Database, type LucideIcon } from 'lucide-react';
@@ -46,14 +47,14 @@ const TOC_ITEMS: readonly TocItem[] = [
 // --- Sub-Components ---
 
 const DataCategoryCard = memo(({ title, icon: Icon, children }: DataCategoryProps) => (
-    <div className="bg-white/[0.02] border border-white/5 rounded-sm p-6 group hover:border-white/10 transition-colors duration-300">
+    <div className="bg-card border border-border rounded-sm p-6 group hover:border-foreground/20 transition-colors duration-300">
         <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 bg-white/5 rounded-sm border border-white/10 text-primary group-hover:text-white group-hover:bg-primary/20 group-hover:border-primary/20 transition-all">
+            <div className="p-2 bg-secondary rounded-sm border border-border text-primary group-hover:text-foreground group-hover:bg-primary/20 group-hover:border-primary/20 transition-all">
                 <Icon size={16} />
             </div>
-            <h4 className="font-display font-bold text-white tracking-tight">{title}</h4>
+            <h4 className="font-display font-bold text-foreground tracking-tight">{title}</h4>
         </div>
-        <div className="text-sm text-gray-400 font-light leading-relaxed text-balance">
+        <div className="text-sm text-muted-foreground font-light leading-relaxed text-balance">
             {children}
         </div>
     </div>
@@ -67,18 +68,18 @@ const ProviderCard = memo(({ name, role, icon: Icon, link }: ProviderCardProps) 
         target={link ? "_blank" : undefined}
         rel={link ? "noopener noreferrer" : undefined}
         className={cn(
-            "flex items-center gap-4 p-4 border border-white/10 bg-black rounded-sm transition-all duration-300",
-            link ? "hover:border-white/30 cursor-pointer group" : "opacity-80 cursor-default"
+            "flex items-center gap-4 p-4 border border-border bg-card rounded-sm transition-all duration-300",
+            link ? "hover:border-foreground/20 cursor-pointer group" : "opacity-80 cursor-default"
         )}
     >
-        <div className="p-2 bg-white/5 rounded-sm border border-white/10 text-gray-400 group-hover:text-white transition-colors">
+        <div className="p-2 bg-secondary rounded-sm border border-border text-muted-foreground group-hover:text-foreground transition-colors">
             <Icon size={16} />
         </div>
         <div>
-            <div className="font-bold text-white text-sm font-display tracking-tight group-hover:text-primary transition-colors">{name}</div>
-            <div className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">{role}</div>
+            <div className="font-bold text-foreground text-sm font-display tracking-tight group-hover:text-primary transition-colors">{name}</div>
+            <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">{role}</div>
         </div>
-        {link && <ArrowRight size={12} className="ml-auto text-gray-600 group-hover:text-white transition-colors" />}
+        {link && <ArrowRight size={12} className="ml-auto text-muted-foreground group-hover:text-foreground transition-colors" />}
     </a>
 ));
 
@@ -87,15 +88,15 @@ ProviderCard.displayName = 'ProviderCard';
 const PrivacySection = memo(({ id, number, title, children }: PrivacySectionProps) => (
   <div id={id} className="scroll-mt-32 mb-20 relative group">
     {/* Visual Anchor Line */}
-    <div className="absolute -left-6 lg:-left-12 top-0 bottom-0 w-px bg-white/5 group-hover:bg-white/10 transition-colors duration-500" />
+    <div className="absolute -left-6 lg:-left-12 top-0 bottom-0 w-px bg-border group-hover:bg-foreground/10 transition-colors duration-500" />
     <div className="absolute -left-6 lg:-left-12 top-0 h-12 w-px bg-primary scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
     
     <div className="flex flex-col gap-8">
-        <div className="flex items-baseline gap-4 border-b border-white/5 pb-6">
+        <div className="flex items-baseline gap-4 border-b border-border pb-6">
             <span className="font-mono text-xs text-primary uppercase tracking-widest">{number}</span>
-            <h3 className="text-3xl md:text-4xl font-display font-bold text-white tracking-tight leading-none">{title}</h3>
+            <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground tracking-tight leading-none">{title}</h3>
         </div>
-        <div className="prose prose-invert prose-lg max-w-none text-gray-400 font-light leading-relaxed">
+        <div className="prose dark:prose-invert prose-lg max-w-none text-muted-foreground font-light leading-relaxed">
             {children}
         </div>
     </div>
@@ -145,13 +146,13 @@ const TableOfContents = () => {
           className={cn(
             "flex items-center justify-between group py-3 pr-4 border-l-2 transition-all duration-300",
             activeId === item.id 
-              ? "border-primary pl-5 bg-white/[0.03]" 
-              : "border-transparent pl-4 hover:pl-5 hover:border-white/10 hover:bg-white/[0.01]"
+              ? "border-primary pl-5 bg-secondary/50" 
+              : "border-transparent pl-4 hover:pl-5 hover:border-border hover:bg-secondary/30"
           )}
         >
           <span className={cn(
               "font-mono text-[10px] uppercase tracking-widest truncate transition-colors duration-300",
-              activeId === item.id ? "text-white" : "text-gray-500 group-hover:text-gray-300"
+              activeId === item.id ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"
           )}>
               {item.label}
           </span>
@@ -168,32 +169,32 @@ const TableOfContents = () => {
 
 const Privacy: React.FC = () => {
   return (
-    <div className="pt-24 min-h-screen bg-black text-white font-sans selection:bg-white selection:text-black overflow-x-hidden">
+    <div className="pt-24 min-h-screen bg-background text-foreground font-sans selection:bg-foreground selection:text-background overflow-x-hidden">
       <DitherGrid className="opacity-10 fixed inset-0 z-0" aria-hidden="true" />
       
       <Section className="relative z-10 !pb-24">
         <Container>
             
             {/* Header Block */}
-            <div className="mb-24 pb-12 border-b border-white/5">
+            <div className="mb-24 pb-12 border-b border-border">
                 <Reveal>
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 bg-white/5 rounded-full text-[10px] font-mono uppercase tracking-widest text-muted mb-8 backdrop-blur-md">
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-border bg-secondary/50 rounded-full text-[10px] font-mono uppercase tracking-widest text-muted-foreground mb-8 backdrop-blur-md">
                         <Lock size={12} className="text-primary" />
                         <ScrambleText text="DATA PROTECTION PROTOCOL" delay={200} />
                     </div>
-                    <h1 className="text-6xl md:text-8xl font-display font-bold text-white mb-8 tracking-tighter leading-[0.9]">
+                    <h1 className="text-6xl md:text-8xl font-display font-bold text-foreground mb-8 tracking-tighter leading-[0.9]">
                         Privacy Policy
                     </h1>
                 </Reveal>
                 <Reveal delay={100}>
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
                         <div className="md:col-span-8">
-                            <p className="text-xl text-gray-400 font-light leading-relaxed text-balance border-l-2 border-white/10 pl-6">
+                            <p className="text-xl text-muted-foreground font-light leading-relaxed text-balance border-l-2 border-border pl-6">
                                 At Asymmetric.al, operating under Global Fellowship Inc., we view data stewardship as a sacred trust. This Privacy Policy details how we collect, use, and protect your information.
                             </p>
                         </div>
                         <div className="md:col-span-4 flex md:justify-end">
-                            <div className="flex items-center gap-3 text-xs font-mono text-gray-500 uppercase tracking-widest bg-white/[0.02] border border-white/10 px-4 py-2 rounded-sm">
+                            <div className="flex items-center gap-3 text-xs font-mono text-muted-foreground uppercase tracking-widest bg-secondary/30 border border-border px-4 py-2 rounded-sm">
                                 <FileText size={14} />
                                 <span>Effective: Nov 14, 2025</span>
                             </div>
@@ -207,15 +208,15 @@ const Privacy: React.FC = () => {
                 {/* Sidebar Navigation */}
                 <div className="hidden lg:block lg:col-span-3 relative">
                     <div className="sticky top-32">
-                        <div className="mb-6 font-mono text-[10px] text-gray-500 uppercase tracking-widest pl-4">Contents</div>
+                        <div className="mb-6 font-mono text-[10px] text-muted-foreground uppercase tracking-widest pl-4">Contents</div>
                         <TableOfContents />
                         
-                        <div className="mt-12 mx-4 pt-8 border-t border-white/5">
-                             <div className="flex items-center gap-2 text-white/40 mb-4">
+                        <div className="mt-12 mx-4 pt-8 border-t border-border">
+                             <div className="flex items-center gap-2 text-muted-foreground/60 mb-4">
                                 <ShieldCheck size={16} />
                                 <span className="font-mono text-[10px] uppercase tracking-widest">GDPR / CCPA Ready</span>
                              </div>
-                             <p className="text-[11px] text-gray-500 leading-relaxed font-light font-mono">
+                             <p className="text-[11px] text-muted-foreground leading-relaxed font-light font-mono">
                                 Your data sovereignty is paramount. We do not sell user data.
                              </p>
                         </div>
@@ -248,7 +249,7 @@ const Privacy: React.FC = () => {
 
                             <PrivacySection id="use" number="02" title="Use of Data">
                                 <p className="mb-8">Asymmetric.al uses the collected data for various purposes:</p>
-                                <div className="bg-white/[0.02] border border-white/5 rounded-sm p-8">
+                                <div className="bg-card border border-border rounded-sm p-8">
                                     <ul className="space-y-4">
                                         {[
                                             "To provide and maintain the Service.",
@@ -260,8 +261,8 @@ const Privacy: React.FC = () => {
                                             "To detect, prevent and address technical issues."
                                         ].map((item, i) => (
                                             <li key={i} className="flex gap-4 items-start group/item">
-                                                <CheckCircle2 size={16} className="text-white/20 mt-1 shrink-0 group-hover/item:text-primary transition-colors" />
-                                                <span className="text-gray-400 group-hover/item:text-gray-300 transition-colors">{item}</span>
+                                                <CheckCircle2 size={16} className="text-muted-foreground/40 mt-1 shrink-0 group-hover/item:text-primary transition-colors" />
+                                                <span className="text-muted-foreground group-hover/item:text-foreground transition-colors">{item}</span>
                                             </li>
                                         ))}
                                     </ul>
@@ -269,9 +270,9 @@ const Privacy: React.FC = () => {
                             </PrivacySection>
 
                             <PrivacySection id="sovereignty" number="03" title="Data Sovereignty">
-                                <TechPanel title="PHILOSOPHY" className="bg-black border border-white/10">
-                                    <p className="text-gray-400 leading-relaxed text-balance">
-                                        We operate under a philosophy of tenant sovereignty. Data generated by a ministry organization (Tenants) on our platform belongs to that organization. We act as data processors, not owners. <strong className="text-white font-normal">We do not sell, rent, or trade your data to third parties for marketing purposes.</strong>
+                                <TechPanel title="PHILOSOPHY" className="bg-card border border-border">
+                                    <p className="text-muted-foreground leading-relaxed text-balance">
+                                        We operate under a philosophy of tenant sovereignty. Data generated by a ministry organization (Tenants) on our platform belongs to that organization. We act as data processors, not owners. <strong className="text-foreground font-normal">We do not sell, rent, or trade your data to third parties for marketing purposes.</strong>
                                     </p>
                                 </TechPanel>
                             </PrivacySection>
@@ -322,7 +323,7 @@ const Privacy: React.FC = () => {
 
                             <PrivacySection id="rights" number="07" title="Your Data Rights">
                                 <p>
-                                    Depending on your location, you may have rights regarding your personal data, including the right to access, correct, or delete your data. To exercise these rights, please contact us at <a href="mailto:info@asymmetric.al" className="text-white hover:text-primary transition-colors underline decoration-white/30 hover:decoration-primary/50 underline-offset-4">info@asymmetric.al</a>.
+                                    Depending on your location, you may have rights regarding your personal data, including the right to access, correct, or delete your data. To exercise these rights, please contact us at <a href="mailto:info@asymmetric.al" className="text-foreground hover:text-primary transition-colors underline decoration-border hover:decoration-primary/50 underline-offset-4">info@asymmetric.al</a>.
                                 </p>
                             </PrivacySection>
 
@@ -335,12 +336,12 @@ const Privacy: React.FC = () => {
                         </div>
 
                         {/* Footer Contact */}
-                        <div className="mt-24 pt-12 border-t border-white/10">
-                            <h4 className="text-2xl font-display font-bold text-white mb-6 tracking-tight">Questions?</h4>
-                            <p className="text-gray-400 mb-8 font-light text-sm max-w-lg leading-relaxed">
+                        <div className="mt-24 pt-12 border-t border-border">
+                            <h4 className="text-2xl font-display font-bold text-foreground mb-6 tracking-tight">Questions?</h4>
+                            <p className="text-muted-foreground mb-8 font-light text-sm max-w-lg leading-relaxed">
                                 If you have any questions about this Privacy Policy, please contact our compliance officer directly.
                             </p>
-                            <a href="mailto:info@asymmetric.al" className="inline-flex items-center gap-3 text-white bg-white/5 border border-white/10 px-6 py-4 rounded-sm hover:bg-white/10 hover:border-white/20 transition-all font-mono text-sm uppercase tracking-wider group">
+                            <a href="mailto:info@asymmetric.al" className="inline-flex items-center gap-3 text-foreground bg-secondary/30 border border-border px-6 py-4 rounded-sm hover:bg-secondary hover:border-foreground/20 transition-all font-mono text-sm uppercase tracking-wider group">
                                 info@asymmetric.al <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                             </a>
                         </div>
