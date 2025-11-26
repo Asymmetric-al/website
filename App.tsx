@@ -31,25 +31,36 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 
 /**
  * ScrollToTop
- * Resets the window scroll position to (0,0) whenever the route pathname changes.
- * Uses 'instant' behavior to override global smooth-scroll for page transitions.
+ * Handles scroll positioning on route transitions.
+ * Supports instant scroll to top on page change, and smooth scroll to hash anchors.
  */
 const ScrollToTop: React.FC = () => {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    // Disable smooth scrolling temporarily for instant page transition
-    document.documentElement.style.scrollBehavior = 'auto';
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-    
-    // Re-enable smooth scrolling after a small tick
-    // This ensures anchor links on the new page work smoothly
-    const timeout = setTimeout(() => {
-      document.documentElement.style.scrollBehavior = '';
-    }, 100);
-
-    return () => clearTimeout(timeout);
-  }, [pathname]);
+    if (!hash) {
+      // If no hash, scroll to top instantly to simulate new page load
+      document.documentElement.style.scrollBehavior = 'auto';
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      
+      // Re-enable smooth scrolling after a small tick
+      const timeout = setTimeout(() => {
+        document.documentElement.style.scrollBehavior = '';
+      }, 100);
+      return () => clearTimeout(timeout);
+    } else {
+      // If hash exists, attempt to scroll to element
+      // We give a small delay to allow lazy loaded content to potentially render
+      const timeout = setTimeout(() => {
+        const id = hash.replace('#', '');
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 300);
+      return () => clearTimeout(timeout);
+    }
+  }, [pathname, hash]);
 
   return null;
 };

@@ -9,7 +9,7 @@ import {
   type UseInViewOptions,
   type Transition,
   type Variant
-} from 'motion/react'
+} from 'framer-motion'
 
 type MotionComponent = keyof typeof motion
 
@@ -40,7 +40,7 @@ interface MotionPresetProps {
   ref?: React.Ref<any>
 }
 
-// Helper to access motion components dynamically while satisfying TS
+// Helper to access motion components dynamically
 const Motion = motion as any;
 
 function MotionPreset({
