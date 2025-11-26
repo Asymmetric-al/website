@@ -1,4 +1,3 @@
-
 import React, { 
   useEffect, 
   useRef, 
@@ -190,6 +189,7 @@ export const TechPanel = ({ children, className = '', title, noBorder = false }:
 interface SpotlightCardProps {
   readonly children?: ReactNode;
   readonly className?: string;
+  readonly key?: React.Key | null;
 }
 
 export const SpotlightCard = ({ children, className = "" }: SpotlightCardProps) => {
