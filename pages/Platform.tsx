@@ -4,7 +4,7 @@ import {
     Database, Globe, Zap, Mail, FileText, PenTool, BarChart, Layout, Heart, 
     Calendar, PlusCircle, ArrowRight, AlertTriangle, 
     Layers, ShieldAlert, type LucideIcon, Server,
-    MessageCircle, Target
+    MessageCircle, Target, DollarSign
 } from 'lucide-react';
 import { 
     Section, Reveal, Button, DitherGrid, SpotlightCard, 
@@ -62,7 +62,7 @@ const MISSION_CONTROL_TILES: readonly MissionTile[] = [
     { 
         title: "Contributions Hub", 
         desc: "Live transaction feed. Automate reconciliation and eliminate manual entry. Reversals and management in one place all perfectly integrated with Stripe for the best in class payment processing experience.",
-        icon: Zap,
+        icon: DollarSign,
         meta: "// FINANCE"
     },
     { 
@@ -110,7 +110,7 @@ const MISSION_CONTROL_TILES: readonly MissionTile[] = [
     { 
         title: "Automations", 
         desc: "Powered by Zapier's workflow engine. You are fully in charge to trigger actions based on donations, applications, anything imaginable with Zapier's 8,000+ app integrations.",
-        icon: Layout,
+        icon: Zap,
         meta: "// LOGIC"
     },
     {
