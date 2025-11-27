@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Map, ArrowLeft, Home, Search, LifeBuoy, AlertTriangle, Activity, type LucideIcon } from 'lucide-react';
@@ -79,10 +78,10 @@ const SystemRecoveryOption: React.FC<{ option: NavOption; index: number }> = ({ 
 
 const ErrorTerminal: React.FC = () => (
     <div className="font-mono text-[10px] text-destructive/60 uppercase tracking-widest space-y-2 select-none pointer-events-none text-left">
-        <div>> SYSTEM_ERR: 404_NOT_FOUND</div>
-        <div>> LOCATING_RESOURCE... FAILED</div>
-        <div>> INITIATING_RECOVERY_PROTOCOL...</div>
-        <div>> WAITING_FOR_USER_INPUT_</div>
+        <div>&gt; SYSTEM_ERR: 404_NOT_FOUND</div>
+        <div>&gt; LOCATING_RESOURCE... FAILED</div>
+        <div>&gt; INITIATING_RECOVERY_PROTOCOL...</div>
+        <div>&gt; WAITING_FOR_USER_INPUT_</div>
     </div>
 );
 
